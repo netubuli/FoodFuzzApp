@@ -30,4 +30,7 @@ public class SharedPreferenceUtil {
     public String getString(String key, String defVal){
         return preferences.getString(key,defVal);
     }
+    public String getString(String key){
+        return preferences.getString(key,"");
+    }
 }
