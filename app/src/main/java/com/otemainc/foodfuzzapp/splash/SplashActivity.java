@@ -1,6 +1,7 @@
 package com.otemainc.foodfuzzapp.splash;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,14 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void init() {
-        
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Check if the user has been authenticated
+
+
+            }
+        },5000);
+
     }
 }
