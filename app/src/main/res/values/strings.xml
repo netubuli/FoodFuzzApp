@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FoodFuzzApp</string>
+    <string name="food_fuzz_logo">Food Fuzz Logo</string>
+    <string name="powered_by_otema">Powered By Otema</string>
 </resources>
