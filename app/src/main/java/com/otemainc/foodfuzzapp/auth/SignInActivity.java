@@ -1,5 +1,6 @@
 package com.otemainc.foodfuzzapp.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.otemainc.foodfuzzapp.R;
 
@@ -32,6 +34,23 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.skip:
+                Toast.makeText(this, "Skip Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.link_signup:
+                Intent register = new Intent(SignInActivity.this,SignUpActivity.class);
+                startActivity(register);
+                finish();
+                break;
+            case R.id.link_forgot_pass:
+                Toast.makeText(this, "Forgot Password Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_login:
+                Toast.makeText(this, "Login Button Clicked", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
 
     }
 }
