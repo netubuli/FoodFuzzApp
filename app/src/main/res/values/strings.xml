@@ -12,4 +12,5 @@
     <string name="create_account">Sign Up</string>
     <string name="no_account_yet_create_one">No account yet? Sign Up</string>
     <string name="tel_no">Telephone number</string>
+    <string name="skip">Skip</string>
 </resources>

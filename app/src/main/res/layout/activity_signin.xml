@@ -20,6 +20,14 @@
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/food_fuzz_logo" />
 
+        <TextView
+            android:id="@+id/skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/skip"
+            android:textColor="@color/colorAccent" />
+
         <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
