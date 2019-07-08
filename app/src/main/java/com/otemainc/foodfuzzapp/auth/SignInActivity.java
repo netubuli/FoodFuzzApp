@@ -3,14 +3,35 @@ package com.otemainc.foodfuzzapp.auth;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.otemainc.foodfuzzapp.R;
 
-public class SignInActivity extends AppCompatActivity {
-
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
+    TextView signUp,skip, forgetPassword;
+    EditText email, password;
+    Button signIn;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+        signUp = findViewById(R.id.link_signup);
+        signIn = findViewById(R.id.btn_login);
+        skip = findViewById(R.id.skip);
+        forgetPassword = findViewById(R.id.link_forgot_pass);
+        email = findViewById(R.id.input_email);
+        password = findViewById(R.id.input_password);
+        skip.setOnClickListener(this);
+        signIn.setOnClickListener(this);
+        signUp.setOnClickListener(this);
+        forgetPassword.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

@@ -12,18 +12,22 @@ import com.otemainc.foodfuzzapp.R;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     TextView signIn;
-    EditText email, password;
+    EditText name,email, phone, password, cPassword;
     Button signUp;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        signIn = findViewById(R.id.btn_login);
+        signUp = findViewById(R.id.btn_signup);
+        signIn = findViewById(R.id.link_login);
+        name = findViewById(R.id.input_name);
         email = findViewById(R.id.input_email);
+        phone = findViewById(R.id.input_telephone);
         password = findViewById(R.id.input_password);
+        cPassword = findViewById(R.id.input_cpassword);
         signIn.setOnClickListener(this);
         signUp.setOnClickListener(this);
-        }
+    }
 
     @Override
     public void onClick(View view) {
