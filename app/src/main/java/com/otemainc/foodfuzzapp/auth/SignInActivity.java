@@ -44,7 +44,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.link_forgot_pass:
-                Toast.makeText(this, "Forgot Password Clicked", Toast.LENGTH_SHORT).show();
+               Intent resetPwd = new Intent(SignInActivity.this,ForgetPasswordActivity.class);
+               startActivity(resetPwd);
+               finish();
                 break;
             case R.id.btn_login:
                 final String email = emailText.getText().toString().trim();
@@ -53,7 +55,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     auth(email,password);
                 }
                 break;
-
         }
 
     }
@@ -77,6 +78,5 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             passwordText.setError(null);
         }
         return  valid;
-
     }
 }
