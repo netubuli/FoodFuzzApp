@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.otemainc.foodfuzzapp.R;
 
 public class SignInActivity extends AppCompatActivity {
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
