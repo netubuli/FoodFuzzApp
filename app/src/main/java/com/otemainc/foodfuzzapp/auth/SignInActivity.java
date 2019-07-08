@@ -50,6 +50,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 final String email = emailText.getText().toString().trim();
                 final String password = passwordText.getText().toString().trim();
                 if(validate( email,password)){
+                    auth(email,password);
 
                 }
                 break;
@@ -58,8 +59,26 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    private void auth(String email, String password) {
+        
+    }
+
     private boolean validate(String email, String password) {
-        boolean valid = true;
+        boolean valid = false;
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailText.setError("enter a valid email address");
+            valid = false;
+        } else {
+            emailText.setError(null);
+        }
+
+        if (password.isEmpty() || password.length() < 4) {
+            passwordText.setError("Password should be at least 4 alphanumeric characters");
+            valid = false;
+        } else {
+            passwordText.setError(null);
+        }
+
         return  valid;
 
     }
