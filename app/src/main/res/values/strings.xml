@@ -5,12 +5,11 @@
     <string name="email">Email</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="password">Password</string>
-    <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
     <string name="name">Name</string>
-    <string name="already_a_member_login">Already a member? Login</string>
+    <string name="already_a_member_login">Already a member? Sign In</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="create_account">Create Account</string>
-    <string name="no_account_yet_create_one">No account yet? Create one</string>
+    <string name="create_account">Sign Up</string>
+    <string name="no_account_yet_create_one">No account yet? Sign Up</string>
     <string name="tel_no">Telephone number</string>
 </resources>
