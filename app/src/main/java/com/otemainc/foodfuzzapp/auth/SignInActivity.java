@@ -63,7 +63,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 //check if there are any blank inputs or the email is not valid or the password is less than four characters
     private boolean validate(String email, String password) {
-        boolean valid = false;
+        boolean valid = true;
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailText.setError("enter a valid email address");
             valid = false;
