@@ -20,4 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/foodfuzzlogo"
         android:contentDescription="@string/food_fuzz_logo" />
+
+
 </android.support.constraint.ConstraintLayout>
