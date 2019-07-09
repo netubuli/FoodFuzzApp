@@ -13,9 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.otemainc.foodfuzzapp.R;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -73,7 +71,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
         }
-
     }
 
     private void save(String name, String email, String phone, String pass) {
@@ -87,7 +84,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             nameText.setError(null);
         }
-
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailText.setError("enter a valid email address");
             valid = false;
@@ -100,7 +96,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }else{
             phoneText.setError(null);
         }
-
         if (pass.isEmpty() || pass.length() < 6) {
             passwordText.setError("Password should be at least 6 characters long");
             valid = false;
@@ -116,7 +111,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }else{
             cPasswordText.setError(null);
         }
-        
         return valid;
     }
 

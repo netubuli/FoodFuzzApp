@@ -43,6 +43,7 @@
                 android:backgroundTint="@color/colorAccent"
                 android:drawableLeft="@drawable/ic_email_24dp"
                 android:drawablePadding="18dp"
+                android:textColor="@color/colorAccent"
                 android:drawableStart="@drawable/ic_email_24dp" />
         </android.support.design.widget.TextInputLayout>
 
@@ -61,7 +62,8 @@
                 android:backgroundTint="@color/colorAccent"
                 android:drawableLeft="@drawable/ic_lock"
                 android:drawablePadding="18dp"
-                android:drawableStart="@drawable/ic_lock" />
+                android:drawableStart="@drawable/ic_lock"
+                android:textColor="@color/colorAccent"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
