@@ -1,5 +1,6 @@
 package com.otemainc.foodfuzzapp.auth;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -51,13 +52,29 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_login:
                 final String email = emailText.getText().toString().trim();
                 final String password = passwordText.getText().toString().trim();
+                final ProgressDialog progressDialog = new ProgressDialog(SignInActivity.this,
+                        R.style.AppTheme_Dark_Dialog);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Authenticating...");
+                progressDialog.show();
+                auth(email,password);
                 if(validate( email,password)){
-                    auth(email,password);
+                    signIn.setEnabled(false);
+
+                }
+                else{
+                    progressDialog.dismiss();
+                    onLoginFailed();
                 }
                 break;
         }
 
     }
+
+    private void onLoginFailed() {
+        signIn.setEnabled(true);
+    }
+
     //attempt to login the user
     private void auth(String email, String password) {
 
