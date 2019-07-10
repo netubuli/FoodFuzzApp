@@ -74,7 +74,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void save(String name, String email, String phone, String pass) {
-    }
+        
+            }
 
     private boolean validate(@NotNull String name, String email, String phone, String pass, String cpass) {
         boolean valid = true;
@@ -113,7 +114,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
         return valid;
     }
-
     //Check if password is valid
     public boolean isValidPassword(final String password) {
         Pattern pattern;
