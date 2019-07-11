@@ -3,14 +3,13 @@ package com.otemainc.foodfuzzapp.auth;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Patterns;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.otemainc.foodfuzzapp.R;
 import org.jetbrains.annotations.NotNull;
@@ -74,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void save(String name, String email, String phone, String pass) {
-        
+
             }
 
     private boolean validate(@NotNull String name, String email, String phone, String pass, String cpass) {
