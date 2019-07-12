@@ -103,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                 new android.os.Handler().postDelayed(
                                         new Runnable() {
                                             public void run() {
-                                                SharedPreferenceUtil.getInstance().getString("is_logged_in","yes");
+                                                SharedPreferenceUtil.getInstance().saveString("is_logged_in","Yes");
                                                 Intent main = new Intent(SignUpActivity.this, HomeActivity.class);
                                                 startActivity(main);
                                                 setResult(RESULT_OK, null);
