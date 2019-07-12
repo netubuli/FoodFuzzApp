@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.otemainc.foodfuzzapp.R;
+import com.otemainc.foodfuzzapp.utility.tabPagerAdapter;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -53,19 +54,16 @@ public class HomeActivity extends AppCompatActivity
         name.setText(extraName);
         email.setText(extraEmail);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
          ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        tab = findViewById(R.id.tabs);
+        pager = findViewById(R.id.container);
+        tabPagerAdapter pagerAdapter = new tabPagerAdapter(getSupportFragmentManager());
+        pager.setAdapter(pagerAdapter);
+        tab.setupWithViewPager(pager);
     }
 
     @Override
