@@ -35,7 +35,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     TextView signIn;
     EditText nameText,emailText, phoneText, passwordText, cPasswordText;
     Button signUp;
-    private static String URL_REGIST = "http://192.168.100.250:8082/foodfuzzbackend/auth/register.php";
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +89,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void save(final String name, final String email, final String phone, final String pass, final ProgressDialog progressDialog) {
+        String URL_REGIST = "http://192.168.100.250:8082/foodfuzzbackend/auth/register.php";
         StringRequest registerStringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
                 new Response.Listener<String>() {
                     @Override
