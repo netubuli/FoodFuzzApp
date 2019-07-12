@@ -1,9 +1,7 @@
 package com.otemainc.foodfuzzapp.auth;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,8 +75,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 progressDialog.show();
                 if(validate( email,password)){
                     signIn.setEnabled(false);
+                    //Call the auth method to login the user
                     auth(email,password, progressDialog);
-
                 }
                 else{
                     progressDialog.dismiss();
@@ -112,7 +110,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                     Toast.makeText(SignInActivity.this, "Login Success.\n Welcome " +name, Toast.LENGTH_SHORT).show();
                                     progressDialog.dismiss();
                                     SharedPreferenceUtil.getInstance().saveString("is_logged_in", "Yes");
-
                                     Intent main = new Intent(SignInActivity.this, HomeActivity.class);
                                     main.putExtra("uName", name);
                                     main.putExtra("uEmail", email1);

@@ -105,6 +105,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             public void run() {
                                                 SharedPreferenceUtil.getInstance().saveString("is_logged_in","Yes");
                                                 Intent main = new Intent(SignUpActivity.this, HomeActivity.class);
+                                                main.putExtra("uName", name);
+                                                main.putExtra("uEmail", email);
                                                 startActivity(main);
                                                 setResult(RESULT_OK, null);
                                                 finish();
