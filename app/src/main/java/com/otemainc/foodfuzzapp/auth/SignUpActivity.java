@@ -10,9 +10,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.otemainc.foodfuzzapp.R;
+import com.otemainc.foodfuzzapp.home.HomeActivity;
+import com.otemainc.foodfuzzapp.utility.SharedPreferenceUtil;
+
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     TextView signIn;
     EditText nameText,emailText, phoneText, passwordText, cPasswordText;
     Button signUp;
+    private static String URL_REGIST = "http://192.168.100.250:8082/foodfuzzbackend/auth/register.php";
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +79,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         signUp.setEnabled(true);
                     }else{
                         passwordText.setError(null);
-                        save(name,email,phone,pass);
+                        save(name,email,phone,pass, progressDialog);
                     }
                 }else{
                     signUp.setEnabled(true);
@@ -72,9 +88,58 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void save(String name, String email, String phone, String pass) {
+    private void save(final String name, final String email, final String phone, final String pass, final ProgressDialog progressDialog) {
+        StringRequest registerStringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject registerObject = new JSONObject(response);
+                            String registerSuccess = registerObject.getString("success");
+                            if(registerSuccess.equals("1")){
+                                progressDialog.dismiss();
+                                Toast.makeText(SignUpActivity.this,"Registration Successfull", Toast.LENGTH_SHORT).show();
+                                new android.os.Handler().postDelayed(
+                                        new Runnable() {
+                                            public void run() {
+                                                SharedPreferenceUtil.getInstance().getString("is_logged_in","yes");
+                                                Intent main = new Intent(SignUpActivity.this, HomeActivity.class);
+                                                startActivity(main);
+                                                setResult(RESULT_OK, null);
+                                                finish();
+                                            }
+                                        }, 3000);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                            Toast.makeText(SignUpActivity.this,"Registration Failed " + e.toString(), Toast.LENGTH_SHORT).show();
+                            signUp.setEnabled(true);
 
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(SignUpActivity.this,"Registration Error " + error.toString(), Toast.LENGTH_SHORT).show();
+                        signUp.setEnabled(true);
+                    }
+                }){
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", name);
+                params.put("email", email);
+                params.put("tel", phone);
+                params.put("password", pass);
+                return params;
             }
+        };
+        RequestQueue registerrequestQueue = Volley.newRequestQueue(this);
+        registerrequestQueue.add(registerStringRequest);
+
+    }
 
     private boolean validate(@NotNull String name, String email, String phone, String pass, String cpass) {
         boolean valid = true;
