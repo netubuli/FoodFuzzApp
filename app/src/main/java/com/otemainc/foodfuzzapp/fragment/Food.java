@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
@@ -20,7 +19,7 @@ public class Food extends Fragment {
     private static final String TAG = "Food";
     GridView food;
     public Food() {
-        // Required empty public constructor
+
     }
 
 
