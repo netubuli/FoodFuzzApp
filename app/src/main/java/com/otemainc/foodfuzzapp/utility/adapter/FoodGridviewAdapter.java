@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.otemainc.foodfuzzapp.R;
 import com.otemainc.foodfuzzapp.utility.items.Food;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -44,7 +46,19 @@ public class FoodGridviewAdapter extends BaseAdapter {
         final Food food = (Food) this.getItem(position);
         name.setText(food.getTitle());
         cost.setText(food.getCost());
-        
+        //check if there is an image returned
+        if(food.getImage()!= null && food.getImage().length()>0){
+            Picasso.get().load(food.getImage()).placeholder(R.drawable.foodfuzzlogo).into(image);
+        }else{
+            Picasso.get().load(R.drawable.foodfuzzlogo).into(image);
+
+        }
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(f, food.getTitle(),Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }
