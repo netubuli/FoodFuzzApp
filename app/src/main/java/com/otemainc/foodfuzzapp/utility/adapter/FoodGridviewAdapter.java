@@ -42,6 +42,9 @@ public class FoodGridviewAdapter extends BaseAdapter {
         TextView cost = view.findViewById(R.id.cost);
         ImageView image = view.findViewById(R.id.image);
         final Food food = (Food) this.getItem(position);
+        name.setText(food.getTitle());
+        cost.setText(food.getCost());
+        
 
         return view;
     }
