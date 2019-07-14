@@ -1,13 +1,13 @@
-package com.otemainc.foodfuzzapp.utility.adapter;
+package com.otemainc.foodfuzzapp.utility.items;
 
 import android.media.Image;
 
-public class RestaurantAdapter {
+public class Restaurant {
     private Image image;
     private String title;
     private String cost;
 
-    public RestaurantAdapter(Image image, String title, String cost) {
+    public Restaurant(Image image, String title, String cost) {
         this.image = image;
         this.title = title;
         this.cost = cost;
