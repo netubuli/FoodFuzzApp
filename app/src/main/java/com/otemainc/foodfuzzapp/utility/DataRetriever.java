@@ -43,7 +43,7 @@ public class DataRetriever {
                         String name = jsonObject.getString("name");
                         String cost = jsonObject.getString("cost");
                         String image = jsonObject.getString("image");
-                        food = new Food(image,name,cost);
+                        food = new Food(URL_FOOD+"../images/"+ image, name, cost);
                         foods.add(food);
                     }
                     foodGridviewAdapter = new FoodGridviewAdapter(f,foods);

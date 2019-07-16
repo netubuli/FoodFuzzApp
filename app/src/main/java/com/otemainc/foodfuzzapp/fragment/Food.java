@@ -30,9 +30,9 @@ public class Food extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_food, container, false);
+       View view = inflater.inflate(R.layout.fragment_food, container, false);
         food = view.findViewById(R.id.FoodContainer);
-        myprogressbar = view.findViewById(R.id.foodProgressBar);
+       myprogressbar = view.findViewById(R.id.foodProgressBar);
         new DataRetriever(getActivity()).retrieveFood(food,myprogressbar);
 
         return view;
