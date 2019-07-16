@@ -19,7 +19,7 @@ public class FoodGridviewAdapter extends BaseAdapter {
     Context f;
     ArrayList<Food> foods;
 
-    public FoodGridviewAdapter(Context f,ArrayList<Food> foods){
+    public FoodGridviewAdapter(Context f, ArrayList<Food> foods){
         this.f = f;
         this.foods = foods;
     }
