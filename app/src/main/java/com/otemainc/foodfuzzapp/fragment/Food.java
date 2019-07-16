@@ -13,21 +13,23 @@ import androidx.fragment.app.Fragment;
 import com.otemainc.foodfuzzapp.R;
 import com.otemainc.foodfuzzapp.utility.DataRetriever;
 
+import org.jetbrains.annotations.NotNull;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Food extends Fragment {
     private static final String TAG = "Food";
-    GridView food;
-    ProgressBar myprogressbar;
+   private GridView food;
+   private ProgressBar myprogressbar;
     public Food() {
 
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View view = inflater.inflate(R.layout.fragment_food, container, false);
