@@ -38,7 +38,7 @@ public class FoodGridviewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         if(view==null){
-            view = LayoutInflater.from(f).inflate(R.layout.food_layout,viewGroup,false);
+            view = LayoutInflater.from(f).inflate(R.layout.food_layout,null,false);
         }
         TextView name = view.findViewById(R.id.name);
         TextView cost = view.findViewById(R.id.cost);
