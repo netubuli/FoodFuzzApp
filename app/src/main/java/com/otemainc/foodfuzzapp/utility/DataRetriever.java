@@ -47,6 +47,7 @@ public class DataRetriever {
                         foods.add(food);
                     }
                     foodGridviewAdapter = new FoodGridviewAdapter(f,foods);
+
                     myprogressbar.setVisibility(View.GONE);
 
                 }catch (JSONException e){
