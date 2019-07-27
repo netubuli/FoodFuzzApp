@@ -56,7 +56,7 @@ public class DrinkGridviewAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(d, drink.getId() +""+ drink.getTitle()+""+ drink.getImage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(d, drink.getId() +""+ drink.getTitle()+" Successfully added to cart",Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -56,7 +56,7 @@ public class FoodGridviewAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(f, food.getId() +""+ food.getTitle()+""+ food.getImage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(f, food.getId() +""+ food.getTitle()+" Successfully added to cart",Toast.LENGTH_SHORT).show();
             }
         });
 
