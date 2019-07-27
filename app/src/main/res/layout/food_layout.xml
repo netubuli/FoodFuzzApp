@@ -45,6 +45,19 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:typeface="serif"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cost"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/margin_xsmall"
+            android:textAlignment="center"
+            android:text="@string/add_to_cart"
+            android:background="@drawable/rounded_dark_button"
+            android:drawablePadding="@dimen/margin_small"
+            android:drawableLeft="@drawable/ic_add_shopping_cart"/>
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
