@@ -10,26 +10,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.otemainc.foodfuzzapp.R;
-import com.otemainc.foodfuzzapp.utility.items.Food;
+import com.otemainc.foodfuzzapp.utility.items.Drink;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class FoodGridviewAdapter extends BaseAdapter {
-    Context f;
-    ArrayList<Food> foods;
+public class DrinkGridviewAdapter extends BaseAdapter {
+    Context d;
+    ArrayList<Drink> drinks;
 
-    public FoodGridviewAdapter(Context f, ArrayList<Food> foods){
-        this.f = f;
-        this.foods = foods;
+    public DrinkGridviewAdapter(Context d, ArrayList<Drink> drinks){
+        this.d = d;
+        this.drinks = drinks;
     }
     @Override
     public int getCount() {
-        return foods.size();
+        return drinks.size();
     }
     @Override
     public Object getItem(int position) {
-        return foods.get(position);
+        return drinks.get(position);
     }
     @Override
     public long getItemId(int position) {
@@ -38,17 +38,17 @@ public class FoodGridviewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         if(view==null){
-            view = LayoutInflater.from(f).inflate(R.layout.food_layout,null,false);
+            view = LayoutInflater.from(d).inflate(R.layout.drink_layout,null,false);
         }
         TextView name = view.findViewById(R.id.name);
         TextView cost = view.findViewById(R.id.cost);
         ImageView image = view.findViewById(R.id.image);
-        final Food food = (Food) this.getItem(position);
-        name.setText(food.getTitle());
-        cost.setText(food.getCost());
+        final Drink drink = (Drink) this.getItem(position);
+        name.setText(drink.getTitle());
+        cost.setText(drink.getCost());
         //check if there is an image returned
-        if(food.getImage()!= null && food.getImage().length()>0){
-            Picasso.get().load(food.getImage()).placeholder(R.drawable.foodfuzzlogo).into(image);
+        if(drink.getImage()!= null && drink.getImage().length()>0){
+            Picasso.get().load(drink.getImage()).placeholder(R.drawable.foodfuzzlogo).into(image);
         }else{
             Picasso.get().load(R.drawable.foodfuzzlogo).into(image);
 
@@ -56,7 +56,7 @@ public class FoodGridviewAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(f, food.getId() +""+ food.getTitle()+""+ food.getImage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(d, drink.getId() +""+ drink.getTitle()+""+ drink.getImage(),Toast.LENGTH_SHORT).show();
             }
         });
 
