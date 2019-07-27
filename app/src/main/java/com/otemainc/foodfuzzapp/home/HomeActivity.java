@@ -12,7 +12,9 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.otemainc.foodfuzzapp.MainActivity;
 import com.otemainc.foodfuzzapp.R;
+import com.otemainc.foodfuzzapp.utility.SharedPreferenceUtil;
 import com.otemainc.foodfuzzapp.utility.adapter.tabPagerAdapter;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -89,6 +91,12 @@ public class HomeActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }else if(id== R.id.action_logout){
+            SharedPreferenceUtil.getInstance().saveString("is_logged_in", "");
+            Intent Main = new Intent(HomeActivity.this, MainActivity.class);
+            startActivity(Main);
+            finish();
             return true;
         }
 

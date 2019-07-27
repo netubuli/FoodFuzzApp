@@ -82,6 +82,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         save(name,email,phone,pass, progressDialog);
                     }
                 }else{
+                    progressDialog.dismiss();
                     signUp.setEnabled(true);
                 }
                 break;
