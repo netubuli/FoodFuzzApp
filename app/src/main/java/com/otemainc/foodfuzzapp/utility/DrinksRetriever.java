@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class DrinksRetriever {
-    private static final String URL_DRINK = "https://foodfuzz.co.ke/foodfuzzbackend/market/drink/drink.php";
+    private static final String URL_DRINK = "https://foodfuzz.co.ke/public_html/foodfuzzbackend/market/drink/drink.php";
     private final Context d;
     private DrinkGridviewAdapter drinkGridviewAdapter;
 
