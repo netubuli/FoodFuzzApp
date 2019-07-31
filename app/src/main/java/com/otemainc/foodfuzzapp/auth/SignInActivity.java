@@ -32,7 +32,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     TextView signUp,skip, forgetPassword;
     EditText emailText, passwordText;
     Button signIn;
-    private static String URL_LOGIN = "http://192.168.100.250:8082/foodfuzzbackend/auth/login.php";
+    private static String URL_LOGIN = "https://foodfuzz.co.ke/foodfuzzbackend/auth/login.php";
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

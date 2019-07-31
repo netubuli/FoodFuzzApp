@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class DataRetriever {
-    private static final String URL_FOOD = "http://192.168.100.250:8082/foodfuzzbackend/market/food/food.php";
+    private static final String URL_FOOD = "https://foodfuzz.co.ke/foodfuzzbackend/market/food/food.php";
     private final Context f;
     private FoodGridviewAdapter foodGridviewAdapter;
 
