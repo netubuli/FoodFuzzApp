@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.otemainc.foodfuzzapp.R;
 import com.otemainc.foodfuzzapp.home.HomeActivity;
+import com.otemainc.foodfuzzapp.utility.Db;
 import com.otemainc.foodfuzzapp.utility.SharedPreferenceUtil;
 
 import org.json.JSONArray;
@@ -32,6 +33,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     TextView signUp,skip, forgetPassword;
     EditText emailText, passwordText;
     Button signIn;
+    Db mydb;
     private static String URL_LOGIN = "https://foodfuzz.co.ke/foodfuzzbackend/auth/login.php";
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,6 +115,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                     Intent main = new Intent(SignInActivity.this, HomeActivity.class);
                                     main.putExtra("uName", name);
                                     main.putExtra("uEmail", email1);
+                                    mydb.addUser(name,email);
                                     startActivity(main);
                                     finish();
                                 }

@@ -10,7 +10,6 @@ public class Db extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "foodfuzz.db";
     private static final String SQL_CREATE_USERS_TABLE =  "CREATE TABLE tbl_users (" +
-            "id int(11) NOT NULL," +
             "name varchar(100) NOT NULL," +
             "email varchar(60) NOT NULL);";
     private static final String SQL_CREATE_CART_TABLE =  "CREATE TABLE tbl_cart_items (" +
@@ -50,14 +49,12 @@ public class Db extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
-    public boolean addUser(int id,String name, String tel, String email){
-        boolean added = false;
+    public boolean addUser(String name, String email){
+        boolean added;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues();
-        contentValue.put("id",id);
-        contentValue.put("name",name);
-        contentValue.put("tel",tel);
-        contentValue.put("id",email);
+       contentValue.put("name",name);
+       contentValue.put("email",email);
         long result = db.insert("tbl_users",null,contentValue);
         if(result==-1){
             added=false;
