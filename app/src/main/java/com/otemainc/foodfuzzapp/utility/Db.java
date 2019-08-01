@@ -1,5 +1,6 @@
 package com.otemainc.foodfuzzapp.utility;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -31,7 +32,7 @@ public class Db extends SQLiteOpenHelper {
 
     public Db(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        SQLiteDatabase db = this.getWritableDatabase();
+
     }
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_USERS_TABLE);
@@ -48,5 +49,25 @@ public class Db extends SQLiteOpenHelper {
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
+    }
+    public boolean addUser(int id,String name, String tel, String email){
+        boolean added = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValue = new ContentValues();
+        contentValue.put("id",id);
+        contentValue.put("name",name);
+        contentValue.put("tel",tel);
+        contentValue.put("id",email);
+        long result = db.insert("tbl_users",null,contentValue);
+        if(result==-1){
+            added=false;
+        }else{
+            added=true;
+        }
+        return added;
+    }
+        public boolean updateCart(int id, String name, String amount, String supplier, int quanity){
+                boolean updated = false;
+        return updated;
     }
 }
