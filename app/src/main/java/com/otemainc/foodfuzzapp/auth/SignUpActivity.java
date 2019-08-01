@@ -91,6 +91,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void save(final String name, final String email, final String phone, final String pass, final ProgressDialog progressDialog) {
         String URL_REGIST = "https://foodfuzz.co.ke/foodfuzzbackend/auth/register.php";
+
         StringRequest registerStringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
                 new Response.Listener<String>() {
                     @Override
@@ -140,8 +141,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 return params;
             }
         };
-        RequestQueue registerrequestQueue = Volley.newRequestQueue(this);
-        registerrequestQueue.add(registerStringRequest);
+        RequestQueue registerRequestQueue = Volley.newRequestQueue(this);
+        registerRequestQueue.add(registerStringRequest);
 
     }
 

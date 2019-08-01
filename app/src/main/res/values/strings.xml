@@ -35,4 +35,8 @@
     <string name="ksh_000_00">KSH 0.00</string>
     <string name="title">Title</string>
     <string name="log_out">Log out</string>
+    <string name="my_saved_items">My saved Items</string>
+    <string name="my_cart">My cart</string>
+    <string name="orders">Orders</string>
+    <string name="browse_by">Browse by:</string>
 </resources>
