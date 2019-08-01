@@ -31,6 +31,7 @@ public class Db extends SQLiteOpenHelper {
 
     public Db(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        SQLiteDatabase db = this.getWritableDatabase();
     }
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_USERS_TABLE);

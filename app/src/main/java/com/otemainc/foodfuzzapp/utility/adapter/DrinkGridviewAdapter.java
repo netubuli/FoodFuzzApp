@@ -1,7 +1,6 @@
 package com.otemainc.foodfuzzapp.utility.adapter;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import java.util.ArrayList;
 public class DrinkGridviewAdapter extends BaseAdapter {
     Context d;
     ArrayList<Drink> drinks;
+    Db db;
 
     public DrinkGridviewAdapter(Context d, ArrayList<Drink> drinks){
         this.d = d;
@@ -59,8 +59,8 @@ public class DrinkGridviewAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 //save to cart
-                // Gets the data repository in write mode
-                //SQLiteDatabase db = Db.getWritableDatabase();
+db = new Db(d);
+
 
                 Toast.makeText(d,  drink.getTitle()+" Successfully added to cart",Toast.LENGTH_SHORT).show();
             }

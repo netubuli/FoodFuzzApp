@@ -135,6 +135,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
                         Toast.makeText(SignInActivity.this,"Login Failed "+error.toString(), Toast.LENGTH_LONG).show();
+                        onLoginFailed();
                     }
                 })
         {
