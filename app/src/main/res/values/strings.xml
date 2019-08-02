@@ -42,4 +42,8 @@
     <string name="check_out">Check out</string>
     <string name="continue_shopping">Continue Shopping</string>
     <string name="cart_successfully_updated">Cart successfully updated</string>
+    <string name="check_out">Check out</string>
+    <string name="seller">Seller</string>
+    <string name="one">1</string>
+    <string name="remove_from_cart">Remove from cart</string>
 </resources>

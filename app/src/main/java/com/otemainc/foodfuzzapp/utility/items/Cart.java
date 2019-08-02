@@ -3,37 +3,37 @@ package com.otemainc.foodfuzzapp.utility.items;
 import android.media.Image;
 
 public class Cart {
-    private Image image;
+    private int id;
     private String title;
     private String cost;
+    private String seller;
+    private int quantity;
 
-    public Cart(Image image, String title, String cost) {
-        this.image = image;
+    public Cart(int id,  String title, String cost, String seller, int quantity) {
+        this.id = id;
         this.title = title;
         this.cost = cost;
+        this.seller = seller;
+        this.quantity = quantity;
     }
 
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
+    public int getId(){
+        return id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getCost() {
         return cost;
     }
 
-    public void setCost(String cost) {
-        this.cost = cost;
+    public String getSeller() {
+        return seller;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }
