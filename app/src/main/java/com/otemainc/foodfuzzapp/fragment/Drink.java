@@ -11,7 +11,6 @@ import android.widget.ProgressBar;
 import androidx.fragment.app.Fragment;
 
 import com.otemainc.foodfuzzapp.R;
-import com.otemainc.foodfuzzapp.utility.DataRetriever;
 import com.otemainc.foodfuzzapp.utility.DrinksRetriever;
 
 

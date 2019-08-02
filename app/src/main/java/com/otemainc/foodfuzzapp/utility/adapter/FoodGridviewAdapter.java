@@ -9,7 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.otemainc.foodfuzzapp.R;
+import com.otemainc.foodfuzzapp.utility.Db;
+import com.otemainc.foodfuzzapp.utility.dialogs.AddToCartDialog;
 import com.otemainc.foodfuzzapp.utility.items.Food;
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +22,7 @@ import java.util.ArrayList;
 public class FoodGridviewAdapter extends BaseAdapter {
     Context f;
     ArrayList<Food> foods;
+    Db db;
 
     public FoodGridviewAdapter(Context f, ArrayList<Food> foods){
         this.f = f;
@@ -57,7 +62,16 @@ public class FoodGridviewAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(f, food.getId() +""+ food.getTitle()+" Successfully added to cart",Toast.LENGTH_SHORT).show();
+                //save to cart
+                db = new Db(f);
+                boolean isAdded = db.addToCart(food.getId(), food.getTitle(), food.getCost(), food.getSeller(), 1);
+                if (isAdded == true) {
+                    Toast.makeText(f, food.getSeller() + "'s " + food.getTitle() + " Successfully added to cart", Toast.LENGTH_SHORT).show();
+                    AddToCartDialog addToCartDialog = new AddToCartDialog();
+                    addToCartDialog.show(((AppCompatActivity) f).getSupportFragmentManager(),"Add To CART");
+                }else{
+                    Toast.makeText(f, "Error Unable to update cart", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

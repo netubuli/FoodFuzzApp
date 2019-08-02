@@ -54,7 +54,8 @@ public class DataRetriever {
                         String name = jsonObject.getString("name");
                         String cost = jsonObject.getString("cost");
                         String image = jsonObject.getString("image");
-                        food = new Food(id,"https://foodfuzz.co.ke/foodfuzzbackend/market/uploads/images/"+ image, name, "KSH "+cost);
+                        String seller =jsonObject.getString("seller");
+                        food = new Food(id,"https://foodfuzz.co.ke/foodfuzzbackend/market/uploads/images/"+ image, name, "KSH "+cost,seller);
                         foods.add(food);
                     }
                     foodGridviewAdapter = new FoodGridviewAdapter(f,foods);

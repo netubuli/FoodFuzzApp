@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="300dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="@dimen/margin_small"
     card_view:cardCornerRadius="@dimen/margin_xsmall"
     card_view:cardElevation="@dimen/margin_small">
@@ -12,12 +11,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_small">
+        android:layout_gravity="center">
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/cname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/food"
+            android:textStyle="bold"
+            android:textColor="@color/jet"
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:layout_constraintBottom_toTopOf="@+id/cost"
             card_view:layout_constraintEnd_toEndOf="parent"
@@ -27,42 +28,42 @@
             android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         <TextView
-            android:id="@+id/cost"
+            android:id="@+id/tcost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ksh_000_00"
-            card_view:layout_constraintTop_toBottomOf="@+id/name"
-            card_view:layout_constraintBottom_toTopOf="@+id/seller"
+            card_view:layout_constraintTop_toBottomOf="@+id/cname"
+            card_view:layout_constraintBottom_toTopOf="@+id/cseller"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:typeface="serif"/>
         <TextView
-            android:id="@+id/seller"
+            android:id="@+id/cseller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/seller"
-            card_view:layout_constraintTop_toBottomOf="@+id/cost"
-            card_view:layout_constraintBottom_toTopOf="@+id/quantity"
+            card_view:layout_constraintTop_toBottomOf="@+id/tcost"
+            card_view:layout_constraintBottom_toTopOf="@+id/cquantity"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             android:textAppearance="?android:attr/textAppearanceSmall"/>
         <TextView
-            android:id="@+id/quantity"
+            android:id="@+id/cquantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/one"
-            card_view:layout_constraintTop_toBottomOf="@+id/seller"
-            card_view:layout_constraintBottom_toTopOf="@+id/addCart"
+            card_view:layout_constraintTop_toBottomOf="@+id/cseller"
+            card_view:layout_constraintBottom_toTopOf="@+id/updateCart"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:typeface="serif"/>
         <TextView
-            android:id="@+id/addCart"
+            android:id="@+id/updateCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            card_view:layout_constraintTop_toBottomOf="@+id/cost"
+            card_view:layout_constraintTop_toBottomOf="@+id/tcost"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"

@@ -2,6 +2,7 @@ package com.otemainc.foodfuzzapp.utility;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -83,5 +84,11 @@ public class Db extends SQLiteOpenHelper {
         public boolean updateCart(int id, String name, String amount, String supplier, int quanity){
                 boolean updated = false;
         return updated;
+    }
+    public Cursor getAllCartItems(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from tbl_cart_items",null);
+        return  res;
+
     }
 }

@@ -1,7 +1,5 @@
 package com.otemainc.foodfuzzapp.utility.items;
 
-import android.media.Image;
-
 public class Cart {
     private int id;
     private String title;
@@ -16,7 +14,6 @@ public class Cart {
         this.seller = seller;
         this.quantity = quantity;
     }
-
     public int getId(){
         return id;
     }
