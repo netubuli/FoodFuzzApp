@@ -20,7 +20,7 @@
             android:textStyle="bold"
             android:textColor="@color/jet"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintBottom_toTopOf="@+id/cost"
+            card_view:layout_constraintBottom_toTopOf="@+id/tcost"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             android:maxLines="3"

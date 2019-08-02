@@ -58,7 +58,6 @@
                 android:drawableLeft="@drawable/ic_email_24dp"
                 android:drawablePadding="18dp"
                 android:drawableStart="@drawable/ic_email_24dp" />
-            />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Email Label -->
