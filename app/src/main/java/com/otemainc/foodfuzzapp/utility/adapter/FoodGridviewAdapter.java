@@ -1,6 +1,7 @@
 package com.otemainc.foodfuzzapp.utility.adapter;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +65,25 @@ public class FoodGridviewAdapter extends BaseAdapter {
 
                 //save to cart
                 db = new Db(f);
-                boolean isAdded = db.addToCart(food.getId(), food.getTitle(), food.getCost(), food.getSeller(), 1);
+                int id = 0;
+                int quantity = 0;
+                boolean isAdded = false;
+                Cursor res =db.getAllCartItems();
+                if(res.getCount()>0) {
+                    StringBuffer buffer = new StringBuffer();
+                    while (res.moveToNext()) {
+                        id = Integer.parseInt(res.getString(0));
+                        quantity =Integer.parseInt(res.getString(4));
+                    }
+                }
+                if(food.getId()== id){
+                    System.out.println("The id at this point is "+id);
+                    isAdded = db.updateCart(String.valueOf(food.getId()), food.getTitle(), food.getCost(), food.getSeller(), quantity+1);
+
+                }else{
+                    isAdded = db.addToCart(food.getId(), food.getTitle(), food.getCost(), food.getSeller(), 1);
+
+                }
                 if (isAdded == true) {
                     Toast.makeText(f, food.getSeller() + "'s " + food.getTitle() + " Successfully added to cart", Toast.LENGTH_SHORT).show();
                     AddToCartDialog addToCartDialog = new AddToCartDialog();

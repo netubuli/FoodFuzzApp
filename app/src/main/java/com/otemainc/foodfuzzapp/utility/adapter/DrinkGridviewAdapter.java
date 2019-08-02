@@ -1,6 +1,7 @@
 package com.otemainc.foodfuzzapp.utility.adapter;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.otemainc.foodfuzzapp.R;
 import com.otemainc.foodfuzzapp.utility.Db;
 import com.otemainc.foodfuzzapp.utility.dialogs.AddToCartDialog;
+import com.otemainc.foodfuzzapp.utility.items.Cart;
 import com.otemainc.foodfuzzapp.utility.items.Drink;
 import com.squareup.picasso.Picasso;
 
@@ -63,7 +65,25 @@ public class DrinkGridviewAdapter extends BaseAdapter {
             public void onClick(View view) {
                 //save to cart
                 db = new Db(d);
-                boolean isAdded = db.addToCart(drink.getId(), drink.getTitle(), drink.getCost(), drink.getSeller(), 1);
+                int id = 0;
+                int quantity = 0;
+                boolean isAdded = false;
+                Cursor res =db.getAllCartItems();
+                if(res.getCount()>0) {
+                    StringBuffer buffer = new StringBuffer();
+                    while (res.moveToNext()) {
+                        id = Integer.parseInt(res.getString(0));
+                        quantity =Integer.parseInt(res.getString(4));
+                    }
+                }
+                if(drink.getId()== id){
+                    System.out.println("The id at this point is "+id);
+                    isAdded = db.updateCart(String.valueOf(drink.getId()), drink.getTitle(), drink.getCost(), drink.getSeller(), quantity+1);
+
+                }else{
+                    isAdded = db.addToCart(drink.getId(), drink.getTitle(), drink.getCost(), drink.getSeller(), 1);
+
+                }
                 if (isAdded == true) {
                    Toast.makeText(d, drink.getSeller() + "'s " + drink.getTitle() + " Successfully added to cart", Toast.LENGTH_SHORT).show();
                     AddToCartDialog addToCartDialog = new AddToCartDialog();

@@ -37,7 +37,6 @@ public class CartRetriever {
                 int quantity =Integer.parseInt(res.getString(4));
                 cart = new Cart(id, name, cost, seller, quantity);
                 items.add(cart);
-                System.out.println();
             }
             cartListViewAdapter = new CartListViewAdapter(c,items);
             listView.setAdapter(cartListViewAdapter);
