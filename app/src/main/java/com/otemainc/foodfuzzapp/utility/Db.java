@@ -81,7 +81,7 @@ public class Db extends SQLiteOpenHelper {
         }
         return addedCart;
     }
-        public boolean updateCart(int id, String name, String amount, String supplier, int quanity){
+    public boolean updateCart(int id, String name, String amount, String supplier, int quanity){
                 boolean updated = false;
         return updated;
     }
@@ -90,5 +90,9 @@ public class Db extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("Select * from tbl_cart_items",null);
         return  res;
 
+    }
+    public int deleteItem(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete("tbl_cart_items","id=?",new String[]{id});
     }
 }

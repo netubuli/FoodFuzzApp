@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.otemainc.foodfuzzapp.R;
 import com.otemainc.foodfuzzapp.utility.Db;
@@ -57,6 +58,13 @@ public class CartListViewAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                db = new Db(c);
+                int deleteItem = db.deleteItem(String.valueOf(cart.getId()));
+                if(deleteItem>0){
+
+                    Toast.makeText(c,  cart.getTitle() + " Successfully deleted from cart", Toast.LENGTH_SHORT).show();
+
+                }
 
             }
         });
