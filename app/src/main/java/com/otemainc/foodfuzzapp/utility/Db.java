@@ -63,6 +63,23 @@ public class Db extends SQLiteOpenHelper {
         }
         return added;
     }
+    public boolean addToCart(int id, String name, String amount, String supplier, int quantity){
+        boolean addedCart;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValue = new ContentValues();
+        contentValue.put("id",id);
+        contentValue.put("name",name);
+        contentValue.put("amount",amount);
+        contentValue.put("supplier",supplier);
+        contentValue.put("quantity",quantity);
+        long result = db.insert("tbl_users",null,contentValue);
+        if(result==-1){
+            addedCart=false;
+        }else{
+            addedCart=true;
+        }
+        return addedCart;
+    }
         public boolean updateCart(int id, String name, String amount, String supplier, int quanity){
                 boolean updated = false;
         return updated;

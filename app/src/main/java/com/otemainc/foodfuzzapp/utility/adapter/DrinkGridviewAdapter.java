@@ -59,10 +59,10 @@ public class DrinkGridviewAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 //save to cart
-db = new Db(d);
+                db = new Db(d);
 
 
-                Toast.makeText(d,  drink.getTitle()+" Successfully added to cart",Toast.LENGTH_SHORT).show();
+                Toast.makeText(d,  drink.getSeller()+"'s "+drink.getTitle()+" Successfully added to cart",Toast.LENGTH_SHORT).show();
             }
         });
 
