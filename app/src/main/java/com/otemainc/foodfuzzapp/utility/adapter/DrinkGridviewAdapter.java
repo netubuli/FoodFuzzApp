@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
 import com.otemainc.foodfuzzapp.R;
 import com.otemainc.foodfuzzapp.utility.Db;
 import com.otemainc.foodfuzzapp.utility.items.Drink;
@@ -60,9 +61,12 @@ public class DrinkGridviewAdapter extends BaseAdapter {
             public void onClick(View view) {
                 //save to cart
                 db = new Db(d);
-
-
-                Toast.makeText(d,  drink.getSeller()+"'s "+drink.getTitle()+" Successfully added to cart",Toast.LENGTH_SHORT).show();
+                boolean isAdded = db.addToCart(drink.getId(), drink.getTitle(), drink.getCost(), drink.getSeller(), 1);
+                if (isAdded == true) {
+                   Toast.makeText(d, drink.getSeller() + "'s " + drink.getTitle() + " Successfully added to cart", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(d, "Error Unable to update cart", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

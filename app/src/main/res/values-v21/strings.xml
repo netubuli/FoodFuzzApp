@@ -5,4 +5,6 @@
     <string name="my_cart">My cart</string>
     <string name="orders">Orders</string>
     <string name="browse_by">Browse by:</string>
+    <string name="check_out">Check out</string>
+    <string name="continue_shopping">Continue Shopping</string>
 </resources>

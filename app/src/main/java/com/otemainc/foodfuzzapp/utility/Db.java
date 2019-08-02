@@ -72,7 +72,7 @@ public class Db extends SQLiteOpenHelper {
         contentValue.put("amount",amount);
         contentValue.put("supplier",supplier);
         contentValue.put("quantity",quantity);
-        long result = db.insert("tbl_users",null,contentValue);
+        long result = db.insert("tbl_cart_items",null,contentValue);
         if(result==-1){
             addedCart=false;
         }else{
