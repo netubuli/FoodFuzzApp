@@ -49,6 +49,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         signIn.setOnClickListener(this);
         signUp.setOnClickListener(this);
         forgetPassword.setOnClickListener(this);
+        mydb = new Db(this);
     }
 
     @Override
@@ -109,15 +110,21 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                     JSONObject object = loginArray.getJSONObject(i);
                                     final String name = object.getString("name").trim();
                                     final String email1 = object.getString("email").trim();
-                                    Toast.makeText(SignInActivity.this, "Login Success.\n Welcome " +name, Toast.LENGTH_SHORT).show();
-                                    progressDialog.dismiss();
-                                    SharedPreferenceUtil.getInstance().saveString("is_logged_in", "Yes");
-                                    Intent main = new Intent(SignInActivity.this, HomeActivity.class);
-                                    main.putExtra("uName", name);
-                                    main.putExtra("uEmail", email1);
-                                    mydb.addUser(name,email);
-                                    startActivity(main);
-                                    finish();
+                                    boolean isAdded=  mydb.addUser(name,email);
+                                  if(isAdded==true){
+                                      Toast.makeText(SignInActivity.this, "Login Success.\n Welcome " +name, Toast.LENGTH_SHORT).show();
+                                      progressDialog.dismiss();
+                                      SharedPreferenceUtil.getInstance().saveString("is_logged_in", "Yes");
+                                      Intent main = new Intent(SignInActivity.this, HomeActivity.class);
+                                      main.putExtra("uName", name);
+                                      main.putExtra("uEmail", email1);
+                                      startActivity(main);
+                                      finish();
+                                  }else{
+                                      Toast.makeText(SignInActivity.this, "Login failed Unable to update local db", Toast.LENGTH_SHORT).show();
+                                      progressDialog.dismiss();
+                                      onLoginFailed();
+                                  }
                                 }
                             }
                             else {

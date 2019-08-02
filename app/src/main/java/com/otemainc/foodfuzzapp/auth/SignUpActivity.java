@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.otemainc.foodfuzzapp.R;
 import com.otemainc.foodfuzzapp.home.HomeActivity;
+import com.otemainc.foodfuzzapp.utility.Db;
 import com.otemainc.foodfuzzapp.utility.SharedPreferenceUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     TextView signIn;
     EditText nameText,emailText, phoneText, passwordText, cPasswordText;
     Button signUp;
+    Db mydb;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         cPasswordText = findViewById(R.id.input_cpassword);
         signIn.setOnClickListener(this);
         signUp.setOnClickListener(this);
+        mydb = new Db(this);
     }
 
     @Override
@@ -100,20 +103,27 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             JSONObject registerObject = new JSONObject(response);
                             String registerSuccess = registerObject.getString("success");
                             if(registerSuccess.equals("1")){
-                                progressDialog.dismiss();
-                                Toast.makeText(SignUpActivity.this,"Registration Successfull", Toast.LENGTH_SHORT).show();
-                                new android.os.Handler().postDelayed(
-                                        new Runnable() {
-                                            public void run() {
-                                                SharedPreferenceUtil.getInstance().saveString("is_logged_in","Yes");
-                                                Intent main = new Intent(SignUpActivity.this, HomeActivity.class);
-                                                main.putExtra("uName", name);
-                                                main.putExtra("uEmail", email);
-                                                startActivity(main);
-                                                setResult(RESULT_OK, null);
-                                                finish();
-                                            }
-                                        }, 3000);
+                                boolean isAdded=  mydb.addUser(name,email);
+                                if(isAdded==true) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(SignUpActivity.this, "Registration Successfull", Toast.LENGTH_SHORT).show();
+                                    new android.os.Handler().postDelayed(
+                                            new Runnable() {
+                                                public void run() {
+                                                    SharedPreferenceUtil.getInstance().saveString("is_logged_in", "Yes");
+                                                    Intent main = new Intent(SignUpActivity.this, HomeActivity.class);
+                                                    main.putExtra("uName", name);
+                                                    main.putExtra("uEmail", email);
+                                                    startActivity(main);
+                                                    setResult(RESULT_OK, null);
+                                                    finish();
+                                                }
+                                            }, 3000);
+                                }else{
+                                    Toast.makeText(SignUpActivity.this, "Registration failed Unable to update local db", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                    signUp.setEnabled(true);
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
