@@ -32,7 +32,7 @@
     <string name="restaurant">Coming soon</string>
     <string name="cart">Cart</string>
     <string name="add_to_cart">Add to Cart</string>
-    <string name="ksh_000_00">KSH 0.00</string>
+    <string name="ksh_000_00">0.00</string>
     <string name="title">Title</string>
     <string name="log_out">Log out</string>
     <string name="my_saved_items">My saved Items</string>
@@ -45,4 +45,5 @@
     <string name="seller">Seller</string>
     <string name="one">1</string>
     <string name="remove_from_cart">Remove from cart</string>
+    <string name="ksh">KSH </string>
 </resources>

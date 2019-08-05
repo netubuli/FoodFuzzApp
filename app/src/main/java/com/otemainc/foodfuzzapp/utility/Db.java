@@ -81,7 +81,7 @@ public class Db extends SQLiteOpenHelper {
         }
         return addedCart;
     }
-    public boolean updateCart(String id, String name, String amount, String supplier, int quantity){
+    public boolean updateCart(String id, String name, double amount, String supplier, int quantity){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues();
         contentValue.put("id",id);

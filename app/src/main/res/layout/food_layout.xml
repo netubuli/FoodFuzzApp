@@ -5,7 +5,7 @@
     android:layout_height="300dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="@dimen/margin_xsmall"
+    android:layout_margin="@dimen/margin_small"
     card_view:cardCornerRadius="@dimen/margin_xsmall"
     card_view:cardElevation="@dimen/margin_small">
 
@@ -38,6 +38,16 @@
             android:maxLines="3"
             android:padding="@dimen/margin_xsmall"
             android:textAppearance="?android:attr/textAppearanceSmall"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:layout_constraintStart_toStartOf="@id/name"
+            card_view:layout_constraintBottom_toTopOf="@+id/addCart"
+            card_view:layout_constraintEnd_toStartOf="@+id/cost"
+            android:text="@string/ksh"
+            android:layout_marginRight="@dimen/margin_xsmall"
+
+            />
 
         <TextView
             android:id="@+id/cost"

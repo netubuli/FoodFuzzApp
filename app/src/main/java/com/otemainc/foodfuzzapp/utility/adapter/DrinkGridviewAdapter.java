@@ -66,6 +66,7 @@ public class DrinkGridviewAdapter extends BaseAdapter {
                 //save to cart
                 db = new Db(d);
                 int id = 0;
+                double ccost = 0;
                 int quantity = 0;
                 boolean isAdded = false;
                 Cursor res =db.getAllCartItems();
@@ -73,12 +74,13 @@ public class DrinkGridviewAdapter extends BaseAdapter {
                     StringBuffer buffer = new StringBuffer();
                     while (res.moveToNext()) {
                         id = Integer.parseInt(res.getString(0));
+                        ccost =Double.parseDouble(res.getString(2));
                         quantity =Integer.parseInt(res.getString(4));
                     }
                 }
                 if(drink.getId()== id){
                     System.out.println("The id at this point is "+id);
-                    isAdded = db.updateCart(String.valueOf(drink.getId()), drink.getTitle(), drink.getCost(), drink.getSeller(), quantity+1);
+                    isAdded = db.updateCart(String.valueOf(drink.getId()), drink.getTitle(), Double.valueOf(drink.getCost())+ ccost, drink.getSeller(), quantity+1);
 
                 }else{
                     isAdded = db.addToCart(drink.getId(), drink.getTitle(), drink.getCost(), drink.getSeller(), 1);

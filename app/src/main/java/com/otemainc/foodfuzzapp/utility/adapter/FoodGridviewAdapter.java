@@ -67,18 +67,21 @@ public class FoodGridviewAdapter extends BaseAdapter {
                 db = new Db(f);
                 int id = 0;
                 int quantity = 0;
+                double ccost = 0;
                 boolean isAdded = false;
                 Cursor res =db.getAllCartItems();
                 if(res.getCount()>0) {
                     StringBuffer buffer = new StringBuffer();
                     while (res.moveToNext()) {
                         id = Integer.parseInt(res.getString(0));
+                        ccost =Double.parseDouble(res.getString(2));
                         quantity =Integer.parseInt(res.getString(4));
+
                     }
                 }
                 if(food.getId()== id){
                     System.out.println("The id at this point is "+id);
-                    isAdded = db.updateCart(String.valueOf(food.getId()), food.getTitle(), food.getCost(), food.getSeller(), quantity+1);
+                    isAdded = db.updateCart(String.valueOf(food.getId()), food.getTitle(), Double.valueOf(food.getCost())+ ccost, food.getSeller(), quantity+1);
 
                 }else{
                     isAdded = db.addToCart(food.getId(), food.getTitle(), food.getCost(), food.getSeller(), 1);
