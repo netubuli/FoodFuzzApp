@@ -2,6 +2,7 @@ package com.otemainc.foodfuzzapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,11 +11,11 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.otemainc.foodfuzzapp.utility.Db;
-import com.otemainc.foodfuzzapp.utility.items.Cart;
 
 public class CheckOutActivity extends AppCompatActivity {
    private TableLayout checkoutItems;
     Db mydb;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
