@@ -22,6 +22,7 @@ public class CheckOutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_check_out);
         checkoutItems = findViewById(R.id.tableLayout);
         mydb = new Db(this);
+        Double totalCost = 0.0;
         Cursor data = mydb.getAllCartItems();
         if (data.getCount() > 0) {
             data.moveToFirst();
@@ -31,15 +32,15 @@ public class CheckOutActivity extends AppCompatActivity {
                 TextView title = tableRow.findViewById(R.id.title);
                 TextView cost = tableRow.findViewById(R.id.cost);
                 TextView quantity = tableRow.findViewById(R.id.quantity);
-
                 title.setText(data.getString(1));
                 seller.setText(data.getString(3));
                 quantity.setText(data.getString(4));
                 cost.setText(data.getString(2));
-
+                totalCost += data.getDouble(2);
                 checkoutItems.addView(tableRow);
-
             } while (data.moveToNext());
+            TextView total = findViewById(R.id.totalCost);
+            total.setText(totalCost.toString());
             data.close();
         }
     }

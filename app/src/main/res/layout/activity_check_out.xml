@@ -3,11 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 <TableLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,11 +50,45 @@
             android:background="@drawable/table_border"/>
     </TableRow>
     </TableLayout>
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="@dimen/margin_xsmall"
+        android:layout_gravity="end"
+        android:layout_marginRight="@dimen/margin_xsmall">
+        <TableRow>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:layout_weight="0.25"
+        android:textColor="@color/black"
+        android:background="@drawable/table_border"
+        android:paddingEnd="@dimen/margin_small"
+        android:paddingStart="@dimen/margin_small"
+        android:text="@string/total_ksh"/>
+            <TextView
+                android:id="@+id/totalCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_weight="0.25"
+                android:textColor="@color/black"
+                android:text="@string/_0_00"
+                android:background="@drawable/table_border"
+                android:paddingEnd="@dimen/margin_small"
+                android:paddingStart="@dimen/margin_small"/>
+        </TableRow>
+    </TableLayout>
     <Button
         android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next"
+        android:text="@string/proceed_to_payment"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_medium"/>
 </LinearLayout>
