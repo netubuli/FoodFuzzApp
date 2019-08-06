@@ -1,22 +1,35 @@
 package com.otemainc.foodfuzzapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.otemainc.foodfuzzapp.utility.Db;
 
-public class CheckOutActivity extends AppCompatActivity {
-   private TableLayout checkoutItems;
-    Db mydb;
-    
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
+public class CheckOutActivity extends AppCompatActivity {
+    private TableLayout checkoutItems;
+    Db mydb;
+    private FusedLocationProviderClient client;
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,5 +57,23 @@ public class CheckOutActivity extends AppCompatActivity {
             total.setText(totalCost.toString());
             data.close();
         }
+        requestPermission();
+        client = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(CheckOutActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+
+            return;
+        }
+        client.getLastLocation().addOnSuccessListener(CheckOutActivity.this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if(location != null){
+                    Toast.makeText(CheckOutActivity.this, "We are here "+location, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+    private void requestPermission(){
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION},1);
     }
 }
