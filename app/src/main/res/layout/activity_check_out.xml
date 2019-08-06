@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
 <TableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/tableLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="5dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+    <TableRow>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:text="@string/item"
+            android:textColor="@color/jet"
+            android:textStyle="bold"
+            android:background="@drawable/table_border"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:text="@string/seller"
+            android:textColor="@color/jet"
+            android:textStyle="bold"
+            android:background="@drawable/table_border"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:text="@string/quantity"
+            android:textColor="@color/jet"
+            android:textStyle="bold"
+            android:background="@drawable/table_border"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:text="@string/cost"
+            android:textColor="@color/jet"
+            android:textStyle="bold"
+            android:background="@drawable/table_border"/>
+    </TableRow>
     </TableLayout>
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_medium"/>
+</LinearLayout>
