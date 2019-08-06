@@ -52,4 +52,6 @@
     <string name="total_ksh">TOTAL: KSH</string>
     <string name="proceed_to_payment">Proceed to payment</string>
     <string name="_0_00">0.00:</string>
+    <string name="hint">xxCC10000X</string>
+    <string name="finish">Finish</string>
 </resources>

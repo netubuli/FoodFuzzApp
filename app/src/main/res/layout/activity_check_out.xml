@@ -91,4 +91,39 @@
         android:text="@string/proceed_to_payment"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_medium"/>
+
+    <TextView
+        android:id="@+id/explanation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please make payment to 0706793153 or 0704105709 then paste the confirmation code bellow to confirm payment.
+Note that delivery will not be made untill payment has been recieved."
+        android:textSize="@dimen/text_md"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_xsmall"
+        android:padding="@dimen/margin_xsmall"
+        />
+
+    <EditText
+        android:id="@+id/mpesacode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/hint"
+        android:maxLines="1"
+        android:padding="@dimen/margin_xsmall"
+        android:layout_gravity="center"
+        android:textColor="@color/colorAccent"/>
+
+    <Button
+        android:id="@+id/btnconfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/finish"
+        android:background="@drawable/rounded_dark_button"
+        android:textColor="@color/colorAccent"
+        android:layout_gravity="center"/>
+
 </LinearLayout>

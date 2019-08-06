@@ -102,4 +102,8 @@ public class Db extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("tbl_cart_items","id=?",new String[]{id});
     }
+    public void clearCart(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from tbl_cart_items");
+    }
 }
