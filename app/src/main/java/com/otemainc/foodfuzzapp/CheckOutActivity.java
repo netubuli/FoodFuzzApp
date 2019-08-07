@@ -34,6 +34,7 @@ import com.otemainc.foodfuzzapp.auth.SignInActivity;
 import com.otemainc.foodfuzzapp.auth.SignUpActivity;
 import com.otemainc.foodfuzzapp.home.HomeActivity;
 import com.otemainc.foodfuzzapp.utility.Db;
+import com.otemainc.foodfuzzapp.utility.RandomGenerator;
 import com.otemainc.foodfuzzapp.utility.SharedPreferenceUtil;
 
 import org.json.JSONArray;
@@ -71,6 +72,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         mydb = new Db(this);
         Double totalCost = 0.0;
         Cursor data = mydb.getAllCartItems();
+        String orderId = RandomGenerator.generateRandomString(10);
         if (data.getCount() > 0) {
             data.moveToFirst();
             do {
