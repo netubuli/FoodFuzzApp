@@ -1,13 +1,6 @@
 package com.otemainc.foodfuzzapp;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
-import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
@@ -21,6 +14,10 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,14 +27,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.otemainc.foodfuzzapp.auth.SignInActivity;
-import com.otemainc.foodfuzzapp.auth.SignUpActivity;
-import com.otemainc.foodfuzzapp.home.HomeActivity;
 import com.otemainc.foodfuzzapp.utility.Db;
 import com.otemainc.foodfuzzapp.utility.RandomGenerator;
-import com.otemainc.foodfuzzapp.utility.SharedPreferenceUtil;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -125,10 +117,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btnconfirm:
                 break;
         }
-
-
     }
-
     private void save(final String name, final String email, final String phone, final String pass, final ProgressDialog progressDialog) {
         String URL_ORDER = "https://foodfuzz.co.ke/foodfuzzbackend/market/orders/checkout.php";
         StringRequest registerStringRequest = new StringRequest(Request.Method.POST, URL_ORDER,
