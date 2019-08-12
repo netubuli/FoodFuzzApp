@@ -113,12 +113,13 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 confirm.setVisibility(View.VISIBLE);
 
 
+
                 break;
             case R.id.btnconfirm:
                 break;
         }
     }
-    private void save(final String name, final String email, final String phone, final String pass, final ProgressDialog progressDialog) {
+    private void save(final String orderId, final String client, final String name, final String Seller, final String amount, final String quantity, final String location, final ProgressDialog progressDialog) {
         String URL_ORDER = "https://foodfuzz.co.ke/foodfuzzbackend/market/orders/checkout.php";
         StringRequest registerStringRequest = new StringRequest(Request.Method.POST, URL_ORDER,
                 new Response.Listener<String>() {
@@ -150,10 +151,13 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 }){
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
+                params.put("orderid",orderId);
                 params.put("name", name);
-                params.put("email", email);
-                params.put("tel", phone);
-                params.put("password", pass);
+                params.put("email", client);
+                params.put("tel", Seller);
+                params.put("password", amount);
+                params.put("quantity",quantity);
+                params.put("location",location);
                 return params;
             }
         };
