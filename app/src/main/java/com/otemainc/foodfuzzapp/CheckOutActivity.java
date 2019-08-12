@@ -111,9 +111,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 explain.setVisibility(View.VISIBLE);
                 code.setVisibility(View.VISIBLE);
                 confirm.setVisibility(View.VISIBLE);
-
-
-
+                
                 break;
             case R.id.btnconfirm:
                 break;
