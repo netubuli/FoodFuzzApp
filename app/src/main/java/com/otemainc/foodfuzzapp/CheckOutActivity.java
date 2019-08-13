@@ -46,7 +46,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     EditText code;
     Button pay, confirm;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +63,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         mydb = new Db(this);
         Double totalCost = 0.0;
         Cursor data = mydb.getAllCartItems();
-        String orderId = RandomGenerator.generateRandomString(10);
         if (data.getCount() > 0) {
             data.moveToFirst();
             do {
@@ -111,7 +109,21 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 explain.setVisibility(View.VISIBLE);
                 code.setVisibility(View.VISIBLE);
                 confirm.setVisibility(View.VISIBLE);
-                
+                String client = "";
+                Cursor data = mydb.getAllCartItems();
+                String orderId = RandomGenerator.generateRandomString(10);
+                final ProgressDialog progressDialog = new ProgressDialog(CheckOutActivity.this, R.style.AppTheme_Dark_Dialog);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Creating Account...");
+                progressDialog.show();
+                if (data.getCount() > 0) {
+                    data.moveToFirst();
+                    do {
+                        save(orderId,client,data.getString(1),data.getString(3),data.getString(2),data.getString(4),"location",progressDialog);
+
+                    } while (data.moveToNext());
+                    data.close();
+                }
                 break;
             case R.id.btnconfirm:
                 break;
