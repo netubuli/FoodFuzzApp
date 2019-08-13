@@ -82,10 +82,9 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             total.setText(totalCost.toString());
             data.close();
         }
-        requestPermission();
         client = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(CheckOutActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-
+            requestPermission();
             return;
         }
         client.getLastLocation().addOnSuccessListener(CheckOutActivity.this, new OnSuccessListener<Location>() {
