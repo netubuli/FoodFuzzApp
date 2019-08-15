@@ -113,7 +113,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 String orderId = RandomGenerator.generateRandomString(10);
                 final ProgressDialog progressDialog = new ProgressDialog(CheckOutActivity.this, R.style.AppTheme_Dark_Dialog);
                 progressDialog.setIndeterminate(true);
-                progressDialog.setMessage("Creating Account...");
+                progressDialog.setMessage("Placing your order please wait");
                 progressDialog.show();
                 if (data.getCount() > 0) {
                     data.moveToFirst();
