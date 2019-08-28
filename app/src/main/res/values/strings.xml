@@ -54,4 +54,5 @@
     <string name="_0_00">0.00:</string>
     <string name="hint">xxCC10000X</string>
     <string name="finish">Finish</string>
+    <string name="instructions">Please make payment to 0706793153 then paste the confirmation code bellow to confirm payment. Note that delivery will not be made untill payment has been recieved.</string>
 </resources>
