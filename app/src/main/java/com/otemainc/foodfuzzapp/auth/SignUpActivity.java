@@ -103,27 +103,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             JSONObject registerObject = new JSONObject(response);
                             String registerSuccess = registerObject.getString("success");
                             if(registerSuccess.equals("1")){
-                                boolean isAdded=  mydb.addUser(name,email);
-                                if(isAdded==true) {
-                                    progressDialog.dismiss();
-                                    Toast.makeText(SignUpActivity.this, "Registration Successfull", Toast.LENGTH_SHORT).show();
-                                    new android.os.Handler().postDelayed(
-                                            new Runnable() {
-                                                public void run() {
-                                                    SharedPreferenceUtil.getInstance().saveString("is_logged_in", "Yes");
-                                                    Intent main = new Intent(SignUpActivity.this, HomeActivity.class);
-                                                    main.putExtra("uName", name);
-                                                    main.putExtra("uEmail", email);
-                                                    startActivity(main);
-                                                    setResult(RESULT_OK, null);
-                                                    finish();
-                                                }
-                                            }, 3000);
-                                }else{
-                                    Toast.makeText(SignUpActivity.this, "Registration failed Unable to update local db", Toast.LENGTH_SHORT).show();
-                                    progressDialog.dismiss();
-                                    signUp.setEnabled(true);
-                                }
+                                Intent signIn = new Intent(SignUpActivity.this,SignInActivity.class);
+                                startActivity(signIn);
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
