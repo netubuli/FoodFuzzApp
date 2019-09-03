@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,8 +44,9 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     Db mydb;
     private FusedLocationProviderClient client;
     TextView explain;
-    EditText code;
+    EditText code,deliveryLoc;
     Button pay, confirm;
+    RadioButton currentLoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +60,12 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         confirm.setVisibility(View.GONE);
         explain.setVisibility(View.GONE);
         code.setVisibility(View.GONE);
+        deliveryLoc = findViewById(R.id.txtloc);
+        currentLoc = findViewById(R.id.btnCurrentLoc);
         pay.setOnClickListener(this);
         confirm.setOnClickListener(this);
         mydb = new Db(this);
-        Double totalCost = 0.0;
+        double totalCost = 0.0;
         Cursor data = mydb.getAllCartItems();
         if (data.getCount() > 0) {
             data.moveToFirst();
@@ -79,7 +83,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 checkoutItems.addView(tableRow);
             } while (data.moveToNext());
             TextView total = findViewById(R.id.totalCost);
-            total.setText(totalCost.toString());
+            total.setText(Double.toString(totalCost));
             data.close();
         }
         client = LocationServices.getFusedLocationProviderClient(this);
@@ -115,20 +119,26 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 progressDialog.setIndeterminate(true);
                 progressDialog.setMessage("Placing your order please wait");
                 progressDialog.show();
-                if (data.getCount() > 0) {
-                    data.moveToFirst();
-                    do {
-                        save(orderId,client,data.getString(1),data.getString(3),data.getString(2),data.getString(4),"location",progressDialog);
+                if(currentLoc.isChecked()){
 
-                    } while (data.moveToNext());
-                    data.close();
+                }else{
+                    if (data.getCount() > 0) {
+                        data.moveToFirst();
+                        do {
+                            save(orderId,client,data.getString(1),data.getString(3),data.getString(2),data.getString(4),"","",deliveryLoc.getText().toString(),progressDialog);
+
+                        } while (data.moveToNext());
+                        mydb.clearCart();
+                        data.close();
+                    }
                 }
+
                 break;
             case R.id.btnconfirm:
                 break;
         }
     }
-    private void save(final String orderId, final String client, final String name, final String Seller, final String amount, final String quantity, final String location, final ProgressDialog progressDialog) {
+    private void save(final String orderId, final String client, final String name, final String Seller, final String amount, final String quantity, final String longi, final String lat, final String location, final ProgressDialog progressDialog) {
         String URL_ORDER = "https://foodfuzz.co.ke/foodfuzzbackend/market/orders/checkout.php";
         StringRequest registerStringRequest = new StringRequest(Request.Method.POST, URL_ORDER,
                 new Response.Listener<String>() {
@@ -166,6 +176,8 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 params.put("tel", Seller);
                 params.put("password", amount);
                 params.put("quantity",quantity);
+                params.put("logitiude",longi);
+                params.put("latitude",lat);
                 params.put("location",location);
                 return params;
             }

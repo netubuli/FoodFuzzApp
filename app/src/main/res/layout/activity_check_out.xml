@@ -84,6 +84,28 @@
                 android:paddingStart="@dimen/margin_small"/>
         </TableRow>
     </TableLayout>
+
+    <RadioButton
+        android:id="@+id/btnCurrentLoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/currentLoc"
+        android:checked="true"/>
+
+    <EditText
+        android:id="@+id/txtloc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/deliveryloc"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_md"
+        android:layout_gravity="center"
+        android:inputType="text"
+        android:layout_margin="@dimen/margin_xsmall"
+        android:padding="@dimen/margin_xsmall">
+
+    </EditText>
+
     <Button
         android:id="@+id/btnNext"
         android:layout_width="wrap_content"
@@ -103,7 +125,6 @@
         android:layout_margin="@dimen/margin_xsmall"
         android:padding="@dimen/margin_xsmall"
         />
-
     <EditText
         android:id="@+id/mpesacode"
         android:layout_width="wrap_content"

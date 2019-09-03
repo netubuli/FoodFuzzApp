@@ -108,16 +108,18 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             if(loginSuccess.equals("1")){
                                 for(int i =0; i< loginArray.length();i++){
                                     JSONObject object = loginArray.getJSONObject(i);
+                                    final  int id = object.getInt("id".trim());
                                     final String name = object.getString("name").trim();
-                                    final String email1 = object.getString("email").trim();
-                                    boolean isAdded=  mydb.addUser(name,email);
+                                    final String tel = object.getString("tel".trim());
+                                    final String email = object.getString("email").trim();
+                                    boolean isAdded=  mydb.addUser(id,name,tel,email);
                                   if(isAdded==true){
                                       Toast.makeText(SignInActivity.this, "Login Success.\n Welcome " +name, Toast.LENGTH_SHORT).show();
                                       progressDialog.dismiss();
                                       SharedPreferenceUtil.getInstance().saveString("is_logged_in", "Yes");
                                       Intent main = new Intent(SignInActivity.this, HomeActivity.class);
                                       main.putExtra("uName", name);
-                                      main.putExtra("uEmail", email1);
+                                      main.putExtra("uEmail", email);
                                       startActivity(main);
                                       finish();
                                   }else{

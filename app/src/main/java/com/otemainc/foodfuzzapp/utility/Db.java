@@ -8,10 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Db extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "foodfuzz.db";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "foodfuzz.db";
     private static final String SQL_CREATE_USERS_TABLE =  "CREATE TABLE tbl_users (" +
+            "id int(11) NOT NULL," +
             "name varchar(100) NOT NULL," +
+            "tel varchar(12) NOT NULL," +
             "email varchar(60) NOT NULL);";
     private static final String SQL_CREATE_CART_TABLE =  "CREATE TABLE tbl_cart_items (" +
             "id int(11) NOT NULL," +
@@ -50,11 +52,13 @@ public class Db extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
-    public boolean addUser(String name, String email){
+    public boolean addUser( int id, String name,String tel, String email){
         boolean added;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues();
+        contentValue.put("id",id);
        contentValue.put("name",name);
+       contentValue.put("tel",tel);
        contentValue.put("email",email);
         long result = db.insert("tbl_users",null,contentValue);
         if(result==-1){
