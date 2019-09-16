@@ -85,12 +85,28 @@
         </TableRow>
     </TableLayout>
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:backgroundTint="@color/colorAccent"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:outlineAmbientShadowColor="@color/colorAccent"/>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent" />
+
     <RadioButton
         android:id="@+id/btnCurrentLoc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/currentLoc"
-        android:checked="true"/>
+        android:text="@string/currentLoc" />
 
     <EditText
         android:id="@+id/txtloc"

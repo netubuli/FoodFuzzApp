@@ -2,13 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.otemainc.foodfuzzapp">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -17,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyOrders"></activity>
+        <activity android:name=".DeliveryActivity"></activity>
+        <activity android:name=".MyOrders" />
         <activity android:name=".MakePayment" />
         <activity android:name=".CheckOutActivity" />
         <activity
@@ -29,7 +23,8 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                 <data
+
+                <data
                     android:host="www.foodfuzz.com"
                     android:pathPrefix="/app"
                     android:scheme="http" />
@@ -58,5 +53,12 @@
             android:name=".auth.ForgetPasswordActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

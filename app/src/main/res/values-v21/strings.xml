@@ -20,6 +20,6 @@
     <string name="hint">xxCC10000X</string>
     <string name="finish">Finish</string>
     <string name="instructions">Please make payment to 0706793153 then paste the confirmation code bellow to confirm payment. Note that delivery will not be made until payment has been received.</string>
-    <string name="deliveryloc">Enter your delivery location</string>
-    <string name="currentLoc">Use My current location</string>
+    <string name="deliveryloc">Enter your preferred delivery location</string>
+    <string name="currentLoc">Use My current location for delivery </string>
 </resources>

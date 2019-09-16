@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,13 +29,19 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.otemainc.foodfuzzapp.utility.Db;
 import com.otemainc.foodfuzzapp.utility.RandomGenerator;
+import com.otemainc.foodfuzzapp.utility.SpinnerObject;
+import com.otemainc.foodfuzzapp.utility.adapter.SpinnerAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -47,6 +54,10 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     EditText code,deliveryLoc;
     Button pay, confirm;
     RadioButton currentLoc;
+    private Spinner spinner;
+    private static final String PATH_TO_SERVER = "https://foodfuzz.co.ke/foodfuzzbackend/market/drink/drink.php";
+    protected List<SpinnerObject> spinnerData;
+    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +73,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         code.setVisibility(View.GONE);
         deliveryLoc = findViewById(R.id.txtloc);
         currentLoc = findViewById(R.id.btnCurrentLoc);
+        currentLoc.setOnClickListener(this);
         pay.setOnClickListener(this);
         confirm.setOnClickListener(this);
         mydb = new Db(this);
@@ -85,6 +97,8 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             TextView total = findViewById(R.id.totalCost);
             total.setText(Double.toString(totalCost));
             data.close();
+            queue = Volley.newRequestQueue(this);
+            requestJsonObject();
         }
         client = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(CheckOutActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
@@ -120,6 +134,15 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 progressDialog.setMessage("Placing your order please wait");
                 progressDialog.show();
                 if(currentLoc.isChecked()){
+                    if (data.getCount() > 0) {
+                        data.moveToFirst();
+                        do {
+                            save(orderId,client,data.getString(1),data.getString(3),data.getString(2),data.getString(4),"","","",progressDialog);
+
+                        } while (data.moveToNext());
+                        mydb.clearCart();
+                        data.close();
+                    }
 
                 }else{
                     if (data.getCount() > 0) {
@@ -136,6 +159,12 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btnconfirm:
                 break;
+            case R.id.btnCurrentLoc:
+                if(currentLoc.isChecked()){
+                   deliveryLoc.setVisibility(v.GONE);
+            }else{
+                    deliveryLoc.setVisibility(v.VISIBLE);
+                }
         }
     }
     private void save(final String orderId, final String client, final String name, final String Seller, final String amount, final String quantity, final String longi, final String lat, final String location, final ProgressDialog progressDialog) {
@@ -185,5 +214,29 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         RequestQueue registerRequestQueue = Volley.newRequestQueue(this);
         registerRequestQueue.add(registerStringRequest);
 
+    }
+    private void requestJsonObject(){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, PATH_TO_SERVER, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                GsonBuilder builder = new GsonBuilder();
+                Gson mGson = builder.create();
+                spinnerData = Arrays.asList(mGson.fromJson(response, SpinnerObject[].class));
+                //display first question to the user
+                if(null != spinnerData){
+                    spinner = (Spinner) findViewById(R.id.spinner);
+                    assert spinner != null;
+                    spinner.setVisibility(View.VISIBLE);
+                    SpinnerAdapter spinnerAdapter = new SpinnerAdapter(CheckOutActivity.this, spinnerData);
+                    spinner.setAdapter(spinnerAdapter);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        queue.add(stringRequest);
     }
 }
