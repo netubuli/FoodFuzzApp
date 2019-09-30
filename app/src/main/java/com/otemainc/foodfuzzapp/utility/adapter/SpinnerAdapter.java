@@ -38,7 +38,7 @@ public class SpinnerAdapter extends BaseAdapter{
         if(convertView == null){
             spinnerHolder = new ViewHolder();
             convertView = layoutInflater.inflate(R.layout.spinner_list, parent, false);
-            spinnerHolder.spinnerItemList = (TextView)convertView.findViewById(R.id.spinner_list_item);
+            spinnerHolder.spinnerItemList = (TextView)convertView.findViewById(R.id.txt);
             convertView.setTag(spinnerHolder);
         }else{
             spinnerHolder = (ViewHolder)convertView.getTag();

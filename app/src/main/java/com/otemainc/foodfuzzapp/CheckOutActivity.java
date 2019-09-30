@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -39,6 +40,7 @@ import com.otemainc.foodfuzzapp.utility.adapter.SpinnerAdapter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -55,8 +57,11 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     Button pay, confirm;
     RadioButton currentLoc;
     private Spinner spinner;
-    private static final String PATH_TO_SERVER = "https://foodfuzz.co.ke/foodfuzzbackend/market/drink/drink.php";
+    private static final String PATH_TO_SERVER = "https://foodfuzz.co.ke/foodfuzzbackend/market/zones/zones.php";
     protected List<SpinnerObject> spinnerData;
+    ArrayList<String> listItems=new ArrayList<>();
+    ArrayAdapter<String> adapter;
+    Spinner sp;
     private RequestQueue queue;
 
     @Override
