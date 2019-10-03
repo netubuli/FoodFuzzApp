@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -12,15 +11,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
-import com.otemainc.foodfuzzapp.auth.SignInActivity;
 import com.otemainc.foodfuzzapp.utility.adapter.DrinkGridviewAdapter;
-import com.otemainc.foodfuzzapp.utility.adapter.FoodGridviewAdapter;
 import com.otemainc.foodfuzzapp.utility.items.Drink;
-import com.otemainc.foodfuzzapp.utility.items.Food;
 
 import org.json.JSONArray;
 import org.json.JSONException;

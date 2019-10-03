@@ -61,24 +61,48 @@
         android:layout_gravity="end"
         android:layout_marginRight="@dimen/margin_xsmall">
         <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_weight="0.2"
+                android:textColor="@color/black"
+                android:background="@drawable/table_border"
+                android:paddingEnd="@dimen/margin_small"
+                android:paddingStart="@dimen/margin_small"
+                android:text="@string/delivery_ksh"/>
+            <TextView
+                android:id="@+id/deliveryFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_weight="0.2"
+                android:textColor="@color/black"
+                android:text="@string/_0_00"
+                android:background="@drawable/table_border"
+                android:paddingEnd="@dimen/margin_small"
+                android:paddingStart="@dimen/margin_small"/>
+        </TableRow>
+        <TableRow>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:layout_weight="0.25"
+        android:layout_weight="0.5"
         android:textColor="@color/black"
         android:background="@drawable/table_border"
-        android:paddingEnd="@dimen/margin_small"
-        android:paddingStart="@dimen/margin_small"
-        android:text="@string/total_ksh"/>
+
+        android:text="@string/subtotal_ksh"/>
             <TextView
                 android:id="@+id/totalCost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textStyle="bold"
-                android:layout_weight="0.25"
+                android:layout_weight="0.5"
                 android:textColor="@color/black"
                 android:text="@string/_0_00"
                 android:background="@drawable/table_border"
@@ -96,13 +120,21 @@
         android:backgroundTint="@color/colorAccent"
         android:layout_marginBottom="@dimen/margin_medium"
         android:outlineAmbientShadowColor="@color/colorAccent"/>
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/chose_delivery_zone"
+        android:ems="14"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_md"
+        android:textAlignment="center"/>
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorAccent"
+        />
 
     <RadioButton
         android:id="@+id/btnCurrentLoc"

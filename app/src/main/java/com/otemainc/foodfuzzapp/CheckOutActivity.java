@@ -4,7 +4,7 @@ import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
-import android.os.Build;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +17,6 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -25,6 +24,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpResponse;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -35,11 +35,18 @@ import com.google.gson.GsonBuilder;
 import com.otemainc.foodfuzzapp.utility.Db;
 import com.otemainc.foodfuzzapp.utility.RandomGenerator;
 import com.otemainc.foodfuzzapp.utility.SpinnerObject;
+import com.otemainc.foodfuzzapp.utility.adapter.DrinkGridviewAdapter;
 import com.otemainc.foodfuzzapp.utility.adapter.SpinnerAdapter;
+import com.otemainc.foodfuzzapp.utility.items.Drink;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -47,6 +54,7 @@ import java.util.List;
 import java.util.Map;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 
 public class CheckOutActivity extends AppCompatActivity implements View.OnClickListener {
     private TableLayout checkoutItems;
@@ -61,7 +69,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     protected List<SpinnerObject> spinnerData;
     ArrayList<String> listItems=new ArrayList<>();
     ArrayAdapter<String> adapter;
-    Spinner sp;
     private RequestQueue queue;
 
     @Override
@@ -78,6 +85,9 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         code.setVisibility(View.GONE);
         deliveryLoc = findViewById(R.id.txtloc);
         currentLoc = findViewById(R.id.btnCurrentLoc);
+        spinner =  findViewById(R.id.spinner);
+        adapter=new ArrayAdapter<String>(this,R.layout.spinner_list,R.id.txt,listItems);
+        spinner.setAdapter(adapter);
         currentLoc.setOnClickListener(this);
         pay.setOnClickListener(this);
         confirm.setOnClickListener(this);
@@ -120,6 +130,8 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         });
 
     }
+
+
     private void requestPermission(){
         ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION},1);
     }
@@ -230,7 +242,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 spinnerData = Arrays.asList(mGson.fromJson(response, SpinnerObject[].class));
                 //display first question to the user
                 if(null != spinnerData){
-                    spinner = (Spinner) findViewById(R.id.spinner);
+
                     assert spinner != null;
                     spinner.setVisibility(View.VISIBLE);
                     SpinnerAdapter spinnerAdapter = new SpinnerAdapter(CheckOutActivity.this, spinnerData);
