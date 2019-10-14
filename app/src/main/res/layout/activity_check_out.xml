@@ -120,27 +120,32 @@
         android:backgroundTint="@color/colorAccent"
         android:layout_marginBottom="@dimen/margin_medium"
         android:outlineAmbientShadowColor="@color/colorAccent"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/chose_delivery_zone"
-        android:ems="14"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_md"
-        android:textAlignment="center"/>
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/btnCurrentLoc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/currentLoc" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chose_delivery_zone"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_md"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"/>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent" />
+</LinearLayout>
 
     <EditText
         android:id="@+id/txtloc"

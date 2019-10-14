@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -63,7 +64,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     TextView explain;
     EditText code,deliveryLoc;
     Button pay, confirm;
-    RadioButton currentLoc;
+    CheckBox currentLoc;
     private Spinner spinner;
     private static final String PATH_TO_SERVER = "https://foodfuzz.co.ke/foodfuzzbackend/market/zones/zones.php";
     protected List<SpinnerObject> spinnerData;
