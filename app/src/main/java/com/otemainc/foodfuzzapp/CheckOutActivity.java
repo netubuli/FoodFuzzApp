@@ -61,11 +61,12 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     private TableLayout checkoutItems;
     Db mydb;
     private FusedLocationProviderClient client;
-    TextView explain;
+    TextView explain, spinner_label,total,delivery;
     EditText code,deliveryLoc;
     Button pay, confirm;
     CheckBox currentLoc;
     private Spinner spinner;
+    double totalCost = 0.0;
     private static final String PATH_TO_SERVER = "https://foodfuzz.co.ke/foodfuzzbackend/market/zones/zones.php";
     protected List<SpinnerObject> spinnerData;
     ArrayList<String> listItems=new ArrayList<>();
@@ -87,14 +88,16 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         deliveryLoc = findViewById(R.id.txtloc);
         currentLoc = findViewById(R.id.btnCurrentLoc);
         spinner =  findViewById(R.id.spinner);
+        spinner_label = findViewById(R.id.Spinner_label);
+        delivery = findViewById(R.id.deliveryFee);
+        total = findViewById(R.id.totalCost);
         adapter=new ArrayAdapter<String>(this,R.layout.spinner_list,R.id.txt,listItems);
         spinner.setAdapter(adapter);
         currentLoc.setOnClickListener(this);
         pay.setOnClickListener(this);
         confirm.setOnClickListener(this);
         mydb = new Db(this);
-        double totalCost = 0.0;
-        Cursor data = mydb.getAllCartItems();
+       Cursor data = mydb.getAllCartItems();
         if (data.getCount() > 0) {
             data.moveToFirst();
             do {
@@ -110,8 +113,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 totalCost += data.getDouble(2);
                 checkoutItems.addView(tableRow);
             } while (data.moveToNext());
-            TextView total = findViewById(R.id.totalCost);
-            total.setText(Double.toString(totalCost));
+             total.setText(Double.toString(totalCost));
             data.close();
             queue = Volley.newRequestQueue(this);
             requestJsonObject();
@@ -180,8 +182,15 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btnCurrentLoc:
                 if(currentLoc.isChecked()){
                    deliveryLoc.setVisibility(v.GONE);
+                   spinner.setVisibility(v.GONE);
+                   spinner_label.setVisibility(v.GONE);
+                   delivery.setText("100.00");
+                    totalCost += Double.valueOf(delivery.getText().toString());
+                   total.setText(Double.toString(totalCost));
             }else{
                     deliveryLoc.setVisibility(v.VISIBLE);
+                    spinner.setVisibility(v.VISIBLE);
+                    spinner_label.setVisibility(v.VISIBLE);
                 }
         }
     }
