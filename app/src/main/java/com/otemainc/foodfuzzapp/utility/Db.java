@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Db extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "foodfuzz.db";
     private static final String SQL_CREATE_USERS_TABLE =  "CREATE TABLE tbl_users (" +
             "id int(11) NOT NULL," +

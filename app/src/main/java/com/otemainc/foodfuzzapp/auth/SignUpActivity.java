@@ -94,7 +94,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void save(final String name, final String email, final String phone, final String pass, final ProgressDialog progressDialog) {
         String URL_REGIST = "https://foodfuzz.co.ke/foodfuzzbackend/auth/register.php";
-
         StringRequest registerStringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
                 new Response.Listener<String>() {
                     @Override
@@ -105,7 +104,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             if(registerSuccess.equals("1")){
                                 Intent signIn = new Intent(SignUpActivity.this,SignInActivity.class);
                                 startActivity(signIn);
-
+                                finish();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
