@@ -79,8 +79,7 @@ public class DrinkGridviewAdapter extends BaseAdapter {
                     }
                 }
                 if(drink.getId()== id){
-                    System.out.println("The id at this point is "+id);
-                    isAdded = db.updateCart(String.valueOf(drink.getId()), drink.getTitle(), Double.valueOf(drink.getCost())+ ccost, drink.getSeller(), quantity+1);
+                   isAdded = db.updateCart(String.valueOf(drink.getId()), drink.getTitle(), Double.valueOf(drink.getCost())+ ccost, drink.getSeller(), quantity+1);
 
                 }else{
                     isAdded = db.addToCart(drink.getId(), drink.getTitle(), drink.getCost(), drink.getSeller(), 1);

@@ -7,6 +7,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -28,25 +29,21 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.otemainc.foodfuzzapp.utility.Db;
 import com.otemainc.foodfuzzapp.utility.RandomGenerator;
-import com.otemainc.foodfuzzapp.utility.adapter.SpinnerAdapter;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 
-public class CheckOutActivity extends AppCompatActivity implements View.OnClickListener {
+public class CheckOutActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private TableLayout checkoutItems;
     Db mydb;
     private FusedLocationProviderClient client;
@@ -57,6 +54,10 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     private Spinner spinner;
     double totalCost = 0.0;
     private static final String PATH_TO_SERVER = "https://foodfuzz.co.ke/foodfuzzbackend/market/zones/zones.php";
+    //An ArrayList for Spinner Items
+    private ArrayList<String> zones;
+    //JSON Array
+    private JSONArray result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +74,12 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         deliveryLoc = findViewById(R.id.txtloc);
         currentLoc = findViewById(R.id.btnCurrentLoc);
         spinner =  findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
         spinner_label = findViewById(R.id.Spinner_label);
         delivery = findViewById(R.id.deliveryFee);
         total = findViewById(R.id.totalCost);
-
+        //Initializing the ArrayList
+        zones = new ArrayList<String>();
         currentLoc.setOnClickListener(this);
         pay.setOnClickListener(this);
         confirm.setOnClickListener(this);
@@ -113,9 +116,9 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
+        getData();
 
     }
-
 
     private void requestPermission(){
         ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION},1);
@@ -228,4 +231,98 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    private void getData(){
+        //Creating a string request
+        StringRequest stringRequest = new StringRequest(PATH_TO_SERVER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        JSONObject j = null;
+                        try {
+                            //Parsing the fetched Json String to JSON Object
+                            j = new JSONObject(response);
+
+                            //Storing the Array of JSON String to our JSON Array
+                            result = j.getJSONArray("zone");
+
+                            //Calling method getStudents to get the students from the JSON Array
+                            getZones(result);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+
+        //Creating a request queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        //Adding request to the queue
+        requestQueue.add(stringRequest);
+    }
+
+    private void getZones(JSONArray j){
+        //Traversing through all the items in the json array
+        for(int i=0;i<j.length();i++){
+            try {
+                //Getting json object
+                JSONObject json = j.getJSONObject(i);
+
+                //Adding the name of the student to array list
+                zones.add(json.getString("name"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //Setting adapter to show the items in the spinner
+        spinner.setAdapter(new ArrayAdapter<String>(CheckOutActivity.this, android.R.layout.simple_spinner_dropdown_item, zones));
+    }
+
+    //Method to get student name of a particular position
+    private String getName(int position){
+        String name="";
+        try {
+            //Getting object of given index
+            JSONObject json = result.getJSONObject(position);
+
+            //Fetching name from that object
+            name = json.getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //Returning the name
+        return name;
+    }
+
+    //Doing the same with this method as we did with getName()
+    private String getCost(int position){
+        String cost="";
+        try {
+            JSONObject json = result.getJSONObject(position);
+            cost = json.getString("cost");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return cost;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        delivery.setText(getCost(position));
+        totalCost += Double.valueOf(delivery.getText().toString());
+        total.setText(Double.toString(totalCost));
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        delivery.setText("0.00");
+        totalCost -= Double.valueOf(delivery.getText().toString());
+        total.setText(Double.toString(totalCost));
+
+    }
 }

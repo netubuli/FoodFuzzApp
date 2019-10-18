@@ -5,7 +5,7 @@
     android:background="@color/colorPrimary">
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
     <TableLayout
         android:id="@+id/tableLayout"
@@ -81,7 +81,9 @@
                 android:text="@string/_0_00"
                 android:background="@drawable/table_border"
                 android:paddingEnd="@dimen/margin_medium"
-                android:paddingRight="@dimen/margin_medium" />
+                android:paddingRight="@dimen/margin_medium"
+                android:paddingStart="@dimen/margin_medium"
+                android:paddingLeft="@dimen/margin_medium"/>
         </TableRow>
     </TableLayout>
     <TableLayout
@@ -109,7 +111,9 @@
                 android:text="@string/_0_00"
                 android:background="@drawable/table_border"
                 android:paddingEnd="@dimen/margin_medium"
-                android:paddingRight="@dimen/margin_medium"/>
+                android:paddingRight="@dimen/margin_medium"
+                android:paddingStart="@dimen/margin_medium"
+                android:paddingLeft="@dimen/margin_medium"/>
         </TableRow>
     </TableLayout>
 
@@ -129,7 +133,7 @@
         android:layout_height="wrap_content"
         android:text="@string/currentLoc" />
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
     <TextView
@@ -140,12 +144,12 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_md"
         android:layout_marginEnd="@dimen/margin_medium"
-        android:layout_marginRight="@dimen/margin_medium"/>
+        android:layout_marginRight="@dimen/margin_medium" />
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:textAlignment="center"
         android:textColor="@color/colorAccent" />
 </LinearLayout>
@@ -160,7 +164,8 @@
         android:layout_gravity="center"
         android:inputType="text"
         android:layout_margin="@dimen/margin_xsmall"
-        android:padding="@dimen/margin_xsmall">
+        android:padding="@dimen/margin_xsmall"
+        android:importantForAutofill="no">
 
     </EditText>
 
@@ -193,7 +198,8 @@
         android:maxLines="1"
         android:padding="@dimen/margin_xsmall"
         android:layout_gravity="center"
-        android:textColor="@color/colorAccent"/>
+        android:textColor="@color/colorAccent"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/btnconfirm"

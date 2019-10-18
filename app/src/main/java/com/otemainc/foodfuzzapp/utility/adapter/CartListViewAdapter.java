@@ -61,7 +61,6 @@ public class CartListViewAdapter extends BaseAdapter {
                 db = new Db(c);
                 int deleteItem = db.deleteItem(String.valueOf(cart.getId()));
                 if(deleteItem>0){
-
                     Toast.makeText(c,  cart.getTitle() + " Successfully deleted from cart", Toast.LENGTH_SHORT).show();
 
                 }

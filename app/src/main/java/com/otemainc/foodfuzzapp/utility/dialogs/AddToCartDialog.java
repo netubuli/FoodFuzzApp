@@ -33,8 +33,7 @@ public class AddToCartDialog extends AppCompatDialogFragment {
                 .setPositiveButton("CheckOut", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                        cart = new Cart();
-                        gotToFragment(cart,false);
+
                     }
                 });
         return builder.create();
