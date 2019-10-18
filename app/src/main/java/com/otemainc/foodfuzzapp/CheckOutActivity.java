@@ -51,7 +51,8 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     Button pay, confirm;
     CheckBox currentLoc;
     private Spinner spinner;
-    double totalCost = 0.0;
+    double totalCost = 0.00;
+    double finalCost = 0.00;
     private static final String PATH_TO_SERVER = "https://foodfuzz.co.ke/foodfuzzbackend/market/zones/zones.php";
     //An ArrayList for Spinner Items
     private ArrayList<String> zones;
@@ -168,14 +169,13 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                    spinner.setVisibility(v.GONE);
                    spinner_label.setVisibility(v.GONE);
                    delivery.setText("100.00");
-                    totalCost += Double.valueOf(delivery.getText().toString());
-                   total.setText(Double.toString(totalCost));
+                   finalCost = totalCost + Double.valueOf(delivery.getText().toString());
+                   total.setText(Double.toString(finalCost));
             }else{
                     deliveryLoc.setVisibility(v.VISIBLE);
                     spinner.setVisibility(v.VISIBLE);
                     spinner_label.setVisibility(v.VISIBLE);
                     delivery.setText("0.00");
-                    totalCost -= 100.00;
                     total.setText(Double.toString(totalCost));
                 }
         }
@@ -313,13 +313,12 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         delivery.setText(getCost(position));
-        totalCost += Double.valueOf(delivery.getText().toString());
-        total.setText(Double.toString(totalCost));
+       finalCost = totalCost + Double.valueOf(delivery.getText().toString());
+        total.setText(Double.toString(finalCost));
     }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         delivery.setText("0.00");
-        totalCost -= Double.valueOf(delivery.getText().toString());
         total.setText(Double.toString(totalCost));
 
     }
