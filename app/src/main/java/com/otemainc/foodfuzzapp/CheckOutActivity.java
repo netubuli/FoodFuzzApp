@@ -42,7 +42,6 @@ import java.util.Map;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-
 public class CheckOutActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private TableLayout checkoutItems;
     Db mydb;
@@ -117,7 +116,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         getData();
-
     }
 
     private void requestPermission(){
