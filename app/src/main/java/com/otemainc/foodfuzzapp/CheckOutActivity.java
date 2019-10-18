@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -25,7 +23,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpResponse;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -35,19 +32,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.otemainc.foodfuzzapp.utility.Db;
 import com.otemainc.foodfuzzapp.utility.RandomGenerator;
-import com.otemainc.foodfuzzapp.utility.SpinnerObject;
-import com.otemainc.foodfuzzapp.utility.adapter.DrinkGridviewAdapter;
 import com.otemainc.foodfuzzapp.utility.adapter.SpinnerAdapter;
-import com.otemainc.foodfuzzapp.utility.items.Drink;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -68,10 +57,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     private Spinner spinner;
     double totalCost = 0.0;
     private static final String PATH_TO_SERVER = "https://foodfuzz.co.ke/foodfuzzbackend/market/zones/zones.php";
-    protected List<SpinnerObject> spinnerData;
-    ArrayList<String> listItems=new ArrayList<>();
-    ArrayAdapter<String> adapter;
-    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +76,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         spinner_label = findViewById(R.id.Spinner_label);
         delivery = findViewById(R.id.deliveryFee);
         total = findViewById(R.id.totalCost);
-        adapter=new ArrayAdapter<String>(this,R.layout.spinner_list,R.id.txt,listItems);
-        spinner.setAdapter(adapter);
+
         currentLoc.setOnClickListener(this);
         pay.setOnClickListener(this);
         confirm.setOnClickListener(this);
@@ -115,8 +99,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             } while (data.moveToNext());
              total.setText(Double.toString(totalCost));
             data.close();
-            queue = Volley.newRequestQueue(this);
-            requestJsonObject();
         }
         client = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(CheckOutActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
@@ -191,6 +173,9 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     deliveryLoc.setVisibility(v.VISIBLE);
                     spinner.setVisibility(v.VISIBLE);
                     spinner_label.setVisibility(v.VISIBLE);
+                    delivery.setText("0.00");
+                    totalCost -= 100.00;
+                    total.setText(Double.toString(totalCost));
                 }
         }
     }
@@ -242,28 +227,5 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         registerRequestQueue.add(registerStringRequest);
 
     }
-    private void requestJsonObject(){
-        RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, PATH_TO_SERVER, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                GsonBuilder builder = new GsonBuilder();
-                Gson mGson = builder.create();
-                spinnerData = Arrays.asList(mGson.fromJson(response, SpinnerObject[].class));
-                //display first question to the user
-                if(null != spinnerData){
 
-                    assert spinner != null;
-                    spinner.setVisibility(View.VISIBLE);
-                    SpinnerAdapter spinnerAdapter = new SpinnerAdapter(CheckOutActivity.this, spinnerData);
-                    spinner.setAdapter(spinnerAdapter);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        queue.add(stringRequest);
-    }
 }
