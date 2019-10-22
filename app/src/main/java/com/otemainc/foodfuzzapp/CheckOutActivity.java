@@ -127,6 +127,10 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()){
             case R.id.btnNext:
                 pay.setVisibility(View.GONE);
+                spinner_label.setVisibility(View.GONE);
+                spinner_label.setVisibility(View.GONE);
+                currentLoc.setVisibility((View.GONE));
+                deliveryLoc.setVisibility(View.GONE);
                 explain.setVisibility(View.VISIBLE);
                 code.setVisibility(View.VISIBLE);
                 confirm.setVisibility(View.VISIBLE);

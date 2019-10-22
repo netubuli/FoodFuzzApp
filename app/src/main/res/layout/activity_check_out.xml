@@ -175,7 +175,9 @@
         android:layout_height="wrap_content"
         android:text="@string/proceed_to_payment"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_medium"/>
+        android:layout_marginTop="@dimen/margin_medium"
+        android:background="@drawable/rounded_dark_button"
+        android:textColor="@color/colorAccent"/>
 
     <TextView
         android:id="@+id/explanation"
