@@ -151,8 +151,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                             save(orderId,client,data.getString(1),data.getString(3),data.getString(2),data.getString(4),longitude,latitude,"",progressDialog);
 
                         } while (data.moveToNext());
-                        mydb.clearCart();
-                        data.close();
+                           data.close();
                     }
 
                 }else{
@@ -188,7 +187,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         }
     }
     private void save(final String orderId, final String client, final String name, final String Seller, final String amount, final String quantity, final double longi, final double lat, final String location, final ProgressDialog progressDialog) {
-        String URL_ORDER = "https://foodfuzz.co.ke/foodfuzzbackend/market/orders/checkout.php";
+        String URL_ORDER = "https://foodfuzz.co.ke/foodfuzzbackend/market/orders/order.php";
         StringRequest orderStringRequest = new StringRequest(Request.Method.POST, URL_ORDER,
                 new Response.Listener<String>() {
                     @Override
@@ -203,9 +202,8 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                         } catch (JSONException e) {
                             e.printStackTrace();
                             progressDialog.dismiss();
-                            Toast.makeText(CheckOutActivity.this,"Saving Failed " + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CheckOutActivity.this,"Unable to place order " + e.toString(), Toast.LENGTH_SHORT).show();
                             pay.setEnabled(true);
-
                         }
                     }
                 },
@@ -213,17 +211,17 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
-                        Toast.makeText(CheckOutActivity.this,"Saving Error " + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CheckOutActivity.this,"Error placing order " + error.toString(), Toast.LENGTH_SHORT).show();
                         pay.setEnabled(true);
                     }
                 }){
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
+                Map<String, String> params = new HashMap<String, String>();
                 params.put("orderId",orderId);
                 params.put("name", name);
-                params.put("email", client);
-                params.put("tel", Seller);
-                params.put("password", amount);
+                params.put("client", client);
+                params.put("seller", Seller);
+                params.put("amount", amount);
                 params.put("quantity",quantity);
                 params.put("longitude",String.valueOf(longi));
                 params.put("latitude",String.valueOf(lat));

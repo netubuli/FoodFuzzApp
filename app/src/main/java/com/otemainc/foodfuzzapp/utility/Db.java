@@ -113,7 +113,9 @@ public class Db extends SQLiteOpenHelper {
         String id = null;
         if (res.getCount() > 0) {
             res.moveToFirst();
-            id = res.getString(1);
+            while (res.moveToNext()) {
+                id = res.getString(0);
+            }
             res.close();
         }
         return id;
