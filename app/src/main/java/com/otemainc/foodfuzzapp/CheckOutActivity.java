@@ -53,6 +53,8 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     private Spinner spinner;
     double totalCost = 0.00;
     double finalCost = 0.00;
+    double longitude;
+    double latitude;
     private static final String PATH_TO_SERVER = "https://foodfuzz.co.ke/foodfuzzbackend/market/zones/zones.php";
     //An ArrayList for Spinner Items
     private ArrayList<String> zones;
@@ -112,7 +114,8 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onSuccess(Location location) {
                 if(location != null){
-                    Toast.makeText(CheckOutActivity.this, "We are here "+location, Toast.LENGTH_SHORT).show();
+                    longitude = location.getLongitude();
+                    latitude = location.getLatitude();
                 }
             }
         });
@@ -134,7 +137,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 explain.setVisibility(View.VISIBLE);
                 code.setVisibility(View.VISIBLE);
                 confirm.setVisibility(View.VISIBLE);
-                String client = "";
+                String client = mydb.getUser();
                 Cursor data = mydb.getAllCartItems();
                 String orderId = RandomGenerator.generateRandomString(10);
                 final ProgressDialog progressDialog = new ProgressDialog(CheckOutActivity.this, R.style.AppTheme_Dark_Dialog);
@@ -145,7 +148,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     if (data.getCount() > 0) {
                         data.moveToFirst();
                         do {
-                            save(orderId,client,data.getString(1),data.getString(3),data.getString(2),data.getString(4),"","","",progressDialog);
+                            save(orderId,client,data.getString(1),data.getString(3),data.getString(2),data.getString(4),longitude,latitude,"",progressDialog);
 
                         } while (data.moveToNext());
                         mydb.clearCart();
@@ -156,7 +159,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     if (data.getCount() > 0) {
                         data.moveToFirst();
                         do {
-                            save(orderId,client,data.getString(1),data.getString(3),data.getString(2),data.getString(4),"","",deliveryLoc.getText().toString(),progressDialog);
+                            save(orderId,client,data.getString(1),data.getString(3),data.getString(2),data.getString(4),0.00,0.00,deliveryLoc.getText().toString(),progressDialog);
 
                         } while (data.moveToNext());
                         mydb.clearCart();
@@ -184,16 +187,16 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 }
         }
     }
-    private void save(final String orderId, final String client, final String name, final String Seller, final String amount, final String quantity, final String longi, final String lat, final String location, final ProgressDialog progressDialog) {
+    private void save(final String orderId, final String client, final String name, final String Seller, final String amount, final String quantity, final double longi, final double lat, final String location, final ProgressDialog progressDialog) {
         String URL_ORDER = "https://foodfuzz.co.ke/foodfuzzbackend/market/orders/checkout.php";
-        StringRequest registerStringRequest = new StringRequest(Request.Method.POST, URL_ORDER,
+        StringRequest orderStringRequest = new StringRequest(Request.Method.POST, URL_ORDER,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject registerObject = new JSONObject(response);
-                            String registerSuccess = registerObject.getString("success");
-                            if(registerSuccess.equals("1")){
+                            JSONObject orderObject = new JSONObject(response);
+                            String orderSuccess = orderObject.getString("success");
+                            if(orderSuccess.equals("1")){
                                 Toast.makeText(CheckOutActivity.this,"Order Placed Successfully " , Toast.LENGTH_SHORT).show();
                                 pay.setVisibility(View.GONE);
                             }
@@ -216,20 +219,20 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 }){
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("orderid",orderId);
+                params.put("orderId",orderId);
                 params.put("name", name);
                 params.put("email", client);
                 params.put("tel", Seller);
                 params.put("password", amount);
                 params.put("quantity",quantity);
-                params.put("logitiude",longi);
-                params.put("latitude",lat);
+                params.put("longitude",String.valueOf(longi));
+                params.put("latitude",String.valueOf(lat));
                 params.put("location",location);
                 return params;
             }
         };
-        RequestQueue registerRequestQueue = Volley.newRequestQueue(this);
-        registerRequestQueue.add(registerStringRequest);
+        RequestQueue orderRequestQueue = Volley.newRequestQueue(this);
+        orderRequestQueue.add(orderStringRequest);
 
     }
 

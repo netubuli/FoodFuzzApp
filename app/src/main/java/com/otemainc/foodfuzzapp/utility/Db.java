@@ -5,6 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
+
+import com.otemainc.foodfuzzapp.R;
 
 public class Db extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
@@ -101,6 +106,17 @@ public class Db extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("Select * from tbl_cart_items",null);
         return  res;
 
+    }
+    public String getUser(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT id from tbl_users",null);
+        String id = null;
+        if (res.getCount() > 0) {
+            res.moveToFirst();
+            id = res.getString(1);
+            res.close();
+        }
+        return id;
     }
     public int deleteItem(String id){
         SQLiteDatabase db = this.getWritableDatabase();
