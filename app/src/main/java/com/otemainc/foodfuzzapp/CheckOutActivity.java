@@ -151,7 +151,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     if (data.getCount() > 0) {
                         data.moveToFirst();
                         do {
-                            save(orderId,client, data.getString(0),data.getString(3),String.valueOf(finalCost),data.getString(4),longitude,latitude,"",progressDialog);
+                            save(orderId,client, data.getString(0),data.getString(3),String.valueOf(finalCost),data.getString(4),longitude,latitude,"_",progressDialog);
                         } while (data.moveToNext());
                            data.close();
                         mydb.clearCart();
