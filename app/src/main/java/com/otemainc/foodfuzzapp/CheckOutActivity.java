@@ -37,6 +37,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -118,7 +119,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 if(location != null){
                     longitude = location.getLongitude();
                     latitude = location.getLatitude();
-                    Toast.makeText(CheckOutActivity.this, "Long "+longitude+" Lat "+latitude+" Loc "+location, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(CheckOutActivity.this, "Long "+longitude+" Lat "+latitude+" Loc "+location, Toast.LENGTH_LONG).show();
                     }
             }
         });
@@ -140,7 +141,15 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 explain.setVisibility(View.VISIBLE);
                 code.setVisibility(View.VISIBLE);
                 confirm.setVisibility(View.VISIBLE);
-                String client = mydb.getUser();
+                Cursor clientdata = mydb.getUser();
+                String clientid="";
+                if(clientdata.getCount()>0){
+                    clientdata.moveToFirst();
+                    do{
+                        clientid = clientdata.getString(0);
+                    }while (clientdata.moveToNext());
+                    clientdata.close();
+                }
                 Cursor data = mydb.getAllCartItems();
                 String orderId = RandomGenerator.generateRandomString(10);
                 final ProgressDialog progressDialog = new ProgressDialog(CheckOutActivity.this, R.style.AppTheme_Dark_Dialog);
@@ -151,7 +160,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     if (data.getCount() > 0) {
                         data.moveToFirst();
                         do {
-                            save(orderId,client, data.getString(0),data.getString(3),String.valueOf(finalCost),data.getString(4),longitude,latitude,"_",progressDialog);
+                           save(orderId,clientid, data.getString(0),data.getString(3),String.valueOf(finalCost),data.getString(4),longitude,latitude,"_",progressDialog);
                         } while (data.moveToNext());
                            data.close();
                         mydb.clearCart();
@@ -161,7 +170,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     if (data.getCount() > 0) {
                         data.moveToFirst();
                         do {
-                            save(orderId,client, data.getString(0),data.getString(3), String.valueOf(finalCost),data.getString(4),0.00,0.00,deliveryLoc.getText().toString(),progressDialog);
+                            save(orderId,clientid, data.getString(0),data.getString(3), String.valueOf(finalCost),data.getString(4),0.00,0.00,deliveryLoc.getText().toString(),progressDialog);
                         } while (data.moveToNext());
                         data.close();
                         mydb.clearCart();
@@ -188,9 +197,11 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 }
         }
     }
-    private void save(final String orderId, final String client, final String id, final String Seller, final String amount, final String quantity, final double longi, final double lat, final String location, final ProgressDialog progressDialog) {
+    private void save(final String orderId, final String clientId, final String prodid, final String Seller, final String amount, final String quantity, final double longi, final double lat, final String location, final ProgressDialog progressDialog) {
         String URL_ORDER = "https://foodfuzz.co.ke/foodfuzzbackend/market/orders/order.php";
         StringRequest orderStringRequest = new StringRequest(Request.Method.POST, URL_ORDER,
+                //android M
+
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -219,15 +230,16 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
+                        error.printStackTrace();
                         Toast.makeText(CheckOutActivity.this,"Error placing order " + error.toString(), Toast.LENGTH_SHORT).show();
                         pay.setEnabled(true);
                     }
                 }){
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("orderId",orderId);
-                params.put("name", id);
-                params.put("client", client);
+                params.put("client", clientId);
+                params.put("name", prodid);
                 params.put("seller", Seller);
                 params.put("amount", amount);
                 params.put("quantity",quantity);

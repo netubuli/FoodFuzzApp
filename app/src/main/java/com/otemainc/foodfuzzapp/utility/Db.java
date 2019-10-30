@@ -107,18 +107,10 @@ public class Db extends SQLiteOpenHelper {
         return  res;
 
     }
-    public String getUser(){
+    public Cursor getUser(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT id from tbl_users",null);
-        String id = null;
-        if (res.getCount() > 0) {
-            res.moveToFirst();
-            while (res.moveToNext()) {
-                id = res.getString(0);
-            }
-            res.close();
-        }
-        return id;
+        Cursor res = db.rawQuery("SELECT * from tbl_users",null);
+        return res;
     }
     public int deleteItem(String id){
         SQLiteDatabase db = this.getWritableDatabase();
