@@ -119,7 +119,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 if(location != null){
                     longitude = location.getLongitude();
                     latitude = location.getLatitude();
-                    //Toast.makeText(CheckOutActivity.this, "Long "+longitude+" Lat "+latitude+" Loc "+location, Toast.LENGTH_LONG).show();
                     }
             }
         });
