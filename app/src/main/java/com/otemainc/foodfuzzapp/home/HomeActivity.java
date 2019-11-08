@@ -27,8 +27,7 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private TextView name,email;
     private ImageView image;
     TabLayout tab;
@@ -41,7 +40,6 @@ public class HomeActivity extends AppCompatActivity
         Intent intent = getIntent();
         String extraName = intent.getStringExtra("uName");
         String extraEmail = intent.getStringExtra("uEmail");
-        System.out.println("Your Email Is "+extraEmail + "Your name is"+extraName);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
