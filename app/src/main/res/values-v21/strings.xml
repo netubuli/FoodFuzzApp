@@ -1,5 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">FoodFuzz</string>
+    <string name="food_fuzz_logo">Food Fuzz Logo</string>
+    <string name="powered_by_otema">Powered By Otema Technologies</string>
+    <string name="email">Email</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="name">Full Name</string>
+    <string name="already_a_member_login">Already a member? Sign In</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_account">Sign Up</string>
+    <string name="no_account_yet_create_one">No account yet? Sign Up</string>
+    <string name="tel_no">Telephone number</string>
+    <string name="skip">Skip</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="food">Food</string>
+    <string name="drinks">Drinks</string>
+    <string name="restaurant">Coming soon</string>
+    <string name="cart">Cart</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="ksh_000_00">0.00</string>
+    <string name="title">Title</string>
     <string name="log_out">Log out</string>
     <string name="my_saved_items">My saved Items</string>
     <string name="my_cart">My cart</string>
@@ -14,10 +48,10 @@
     <string name="ksh">KSH </string>
     <string name="item">Item</string>
     <string name="cost">Cost In KSH</string>
-    <string name="total_ksh">TOTAL  KSH: </string>
-    <string name="subtotal_ksh">SUB TOTAL: KSH </string>
-    <string name="delivery_ksh">DELIVERY FEE: KSH </string>
     <string name="quantity">Quantity</string>
+    <string name="total_ksh"> TOTAL FEE: KSH</string>
+    <string name="subtotal_ksh">SUB TOTAL: KSH</string>
+    <string name="delivery_ksh">DELIVERY</string>
     <string name="proceed_to_payment">Proceed to payment</string>
     <string name="_0_00">0.00</string>
     <string name="hint">xxCC10000X</string>

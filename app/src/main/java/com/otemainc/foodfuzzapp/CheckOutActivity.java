@@ -132,14 +132,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnNext:
-                pay.setVisibility(View.GONE);
-                spinner_label.setVisibility(View.GONE);
-                spinner_label.setVisibility(View.GONE);
-                currentLoc.setVisibility((View.GONE));
-                deliveryLoc.setVisibility(View.GONE);
-                explain.setVisibility(View.VISIBLE);
-                code.setVisibility(View.VISIBLE);
-                confirm.setVisibility(View.VISIBLE);
                 Cursor clientdata = mydb.getUser();
                 String clientid="";
                 if(clientdata.getCount()>0){
@@ -163,6 +155,15 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                         } while (data.moveToNext());
                            data.close();
                         mydb.clearCart();
+                        pay.setVisibility(View.GONE);
+                        spinner_label.setVisibility(View.GONE);
+                        spinner_label.setVisibility(View.GONE);
+                        currentLoc.setVisibility((View.GONE));
+                        deliveryLoc.setVisibility(View.GONE);
+                        explain.setVisibility(View.VISIBLE);
+                        code.setVisibility(View.VISIBLE);
+                        confirm.setVisibility(View.VISIBLE);
+                        explain.setText("Please make payment of KSH " + finalCost +  "/= to 0706793153 using MPESA/AIRTEL MONEY/TKASH then paste the confirmation code bellow to confirm payment. Note that delivery will not be made until FULL payment has been received.");
                     }
 
                 }else{
@@ -173,6 +174,16 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                         } while (data.moveToNext());
                         data.close();
                         mydb.clearCart();
+                        pay.setVisibility(View.GONE);
+                        spinner_label.setVisibility(View.GONE);
+                        spinner_label.setVisibility(View.GONE);
+                        currentLoc.setVisibility((View.GONE));
+                        deliveryLoc.setVisibility(View.GONE);
+                        explain.setVisibility(View.VISIBLE);
+                        code.setVisibility(View.VISIBLE);
+                        confirm.setVisibility(View.VISIBLE);
+                        explain.setText("Please make payment of KSH " + finalCost +  "/= to 0706793153 using MPESA/AIRTEL MONEY/TKASH then paste the confirmation code bellow to confirm payment. Note that delivery will not be made until FULL payment has been received.");
+
                     }
                 }
 
