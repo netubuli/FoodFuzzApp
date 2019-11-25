@@ -77,7 +77,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if(validate(name,email,phone,pass,cPass)){
                     signUp.setEnabled(false);
                     if (!isValidPassword(pass)) {
-                        passwordText.setError("Password should contain at least one number, one lowercase letter, one uppercase letter, one special character and no space");
+                        passwordText.setError("Password should contain at least one number, one lowercase letter, one uppercase letter and no spaces");
                         progressDialog.dismiss();
                         signUp.setEnabled(true);
                     }else{
@@ -157,7 +157,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }else{
             phoneText.setError(null);
         }
-        if (pass.isEmpty() || pass.length() < 6) {
+        if (pass.isEmpty() || pass.length() < 4) {
             passwordText.setError("Password should be at least 6 characters long");
             valid = false;
         }else {
@@ -178,7 +178,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public boolean isValidPassword(final String password) {
         Pattern pattern;
         Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
         return matcher.matches();
