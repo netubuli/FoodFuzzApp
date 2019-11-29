@@ -15,7 +15,10 @@ import androidx.fragment.app.Fragment;
 
 import com.otemainc.foodfuzzapp.CheckOutActivity;
 import com.otemainc.foodfuzzapp.R;
+import com.otemainc.foodfuzzapp.auth.SignInActivity;
+import com.otemainc.foodfuzzapp.splash.SplashActivity;
 import com.otemainc.foodfuzzapp.utility.CartRetriever;
+import com.otemainc.foodfuzzapp.utility.SharedPreferenceUtil;
 
 
 public class Cart extends Fragment {
@@ -39,8 +42,16 @@ public class Cart extends Fragment {
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent chekoutView = new Intent(Cart.this.getActivity(), CheckOutActivity.class);
-                startActivity(chekoutView);
+                if (SharedPreferenceUtil.getInstance().getString("is_logged_in").equalsIgnoreCase("")) {
+                    //User is not yet logged in
+                    // show the login activity
+                    Intent login = new Intent(Cart.this.getActivity(), SignInActivity.class);
+                    startActivity(login);
+                }
+                else{
+                    Intent chekoutView = new Intent(Cart.this.getActivity(), CheckOutActivity.class);
+                    startActivity(chekoutView);
+                }
 
             }
         });

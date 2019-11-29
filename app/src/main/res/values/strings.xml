@@ -60,4 +60,10 @@
     <string name="deliveryloc">Enter your preferred delivery location</string>
     <string name="currentLoc">Use My current location for delivery </string>
     <string name="chose_delivery_zone">Chose delivery zone</string>
+    <string name="slide">Order from the comfort of your house</string>
+    <string name="slide1">Sweet and healthy drinks</string>
+    <string name="slide2">Easy and flexible payment modes: pay on delivery, mpesa, airtel money etc</string>
+    <string name="slide3">Delicious meals of your liking</string>
+    <string name="slide4">Fast and efficient delivery</string>
+    <string name="proceed_to_market">Proceed to market</string>
 </resources>
