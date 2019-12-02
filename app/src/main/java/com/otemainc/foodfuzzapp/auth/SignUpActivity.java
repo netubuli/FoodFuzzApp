@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.otemainc.foodfuzzapp.R;
 import com.otemainc.foodfuzzapp.home.HomeActivity;
+import com.otemainc.foodfuzzapp.utility.AppConfig;
 import com.otemainc.foodfuzzapp.utility.Db;
 import com.otemainc.foodfuzzapp.utility.SharedPreferenceUtil;
 
@@ -93,8 +94,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void save(final String name, final String email, final String phone, final String pass, final ProgressDialog progressDialog) {
-        String URL_REGIST = "https://foodfuzz.co.ke/foodfuzzbackend/auth/register.php";
-        StringRequest registerStringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
+        StringRequest registerStringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_REGISTER,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
