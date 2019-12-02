@@ -13,7 +13,10 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.otemainc.foodfuzzapp.MainActivity;
+import com.otemainc.foodfuzzapp.auth.ProfileActivity;
 import com.otemainc.foodfuzzapp.R;
+import com.otemainc.foodfuzzapp.auth.SignInActivity;
+import com.otemainc.foodfuzzapp.utility.Db;
 import com.otemainc.foodfuzzapp.utility.SharedPreferenceUtil;
 import com.otemainc.foodfuzzapp.utility.adapter.tabPagerAdapter;
 
@@ -26,12 +29,14 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private TextView name,email;
     private ImageView image;
     TabLayout tab;
     ViewPager pager;
+    Db mydb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         tabPagerAdapter pagerAdapter = new tabPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
         tab.setupWithViewPager(pager);
+        mydb = new Db(this);
     }
 
     @Override
@@ -91,10 +97,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.action_settings) {
             return true;
         }else if(id== R.id.action_logout){
-            SharedPreferenceUtil.getInstance().saveString("is_logged_in", "");
-            Intent Main = new Intent(HomeActivity.this, MainActivity.class);
-            startActivity(Main);
-            finish();
+            //Check if the user has been authenticated
+            if (SharedPreferenceUtil.getInstance().getString("is_logged_in").equalsIgnoreCase("")) {
+                //User is not yet logged in
+                // show the login activity
+                Toast.makeText(this,"You need to be logged in to complete this process", Toast.LENGTH_LONG).show();
+                Intent login = new Intent(HomeActivity.this, SignInActivity.class);
+                startActivity(login);
+                finish();
+            }else {
+                SharedPreferenceUtil.getInstance().saveString("is_logged_in", "");
+                mydb.deleteUser();
+                Intent Main = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(Main);
+                finish();
+            }
             return true;
         }
 
@@ -107,8 +124,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
+        if (id == R.id.nav_reset_pwd) {
+            //Check if the user has been authenticated
+            if (SharedPreferenceUtil.getInstance().getString("is_logged_in").equalsIgnoreCase("")) {
+                //User is not yet logged in
+                // show the login activity
+                Toast.makeText(this,"You need to be logged in to complete this process", Toast.LENGTH_LONG).show();
+                Intent login = new Intent(HomeActivity.this, SignInActivity.class);
+                startActivity(login);
+                finish();
+            }else {
+                Intent goToReset = new Intent(HomeActivity.this, ProfileActivity.class);
+                startActivity(goToReset);
+                finish();
+            }
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

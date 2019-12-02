@@ -120,4 +120,8 @@ public class Db extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from tbl_cart_items");
     }
+    public void deleteUser(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from tbl_users");
+    }
 }

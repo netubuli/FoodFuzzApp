@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <ImageView android:src="@drawable/foodfuzzlogo"
+            android:layout_width="wrap_content"
+            android:layout_height="72dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/food_fuzz_logo" />
+
+        <!--  Name Label -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_RFname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorAccent"
+                android:backgroundTint="@color/colorAccent"
+                android:drawableLeft="@drawable/ic_person"
+                android:drawablePadding="18dp"
+                android:drawableStart="@drawable/ic_person" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Email Label -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_Remail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorAccent"
+                android:backgroundTint="@color/colorAccent"
+                android:drawableLeft="@drawable/ic_email_24dp"
+                android:drawablePadding="18dp"
+                android:drawableStart="@drawable/ic_email_24dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Email Label -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_RFtelephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorAccent"
+                android:backgroundTint="@color/colorAccent"
+                android:drawableLeft="@drawable/ic_contact_phone"
+                android:drawablePadding="18dp"
+                android:drawableStart="@drawable/ic_contact_phone" />
+            />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password Label -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_RFpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/password"
+                android:importantForAutofill="no"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorAccent"
+                android:backgroundTint="@color/colorAccent"
+                android:drawableLeft="@drawable/ic_lock"
+                android:drawablePadding="18dp"
+                android:drawableStart="@drawable/ic_lock" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password Label -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_RFcpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/confirm_password"
+                android:importantForAutofill="no"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorAccent"
+                android:backgroundTint="@color/colorAccent"
+                android:drawableLeft="@drawable/ic_lock"
+                android:drawablePadding="18dp"
+                android:drawableStart="@drawable/ic_lock" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Signup Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_save"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="@string/submit"
+            android:background="@drawable/rounded_dark_button"
+            android:textColor="@color/colorAccent" />
+
+        <TextView android:id="@+id/link_back"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/go_back_home"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"/>
+
+    </LinearLayout>
+</ScrollView>

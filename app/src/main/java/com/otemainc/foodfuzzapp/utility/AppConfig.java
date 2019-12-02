@@ -8,5 +8,5 @@ public class AppConfig {
     //Server send money url
     public static String URL_PWDRESET = "https://foodfuzz.co.ke/foodfuzzbackend/auth/reset_password.php";
     //balance url
-    public static String URL_BALANCE ="http://192.168.100.250:8082/mlipaapi/account/getbalance.php";
+    public static String URL_UPDATEDATA ="https://foodfuzz.co.ke/foodfuzzbackend/auth/edit_detail.php";
 }

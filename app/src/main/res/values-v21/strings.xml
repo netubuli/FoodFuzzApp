@@ -68,4 +68,7 @@
     <string name="proceed_to_market">Proceed to market</string>
     <string name="reset">Reset</string>
     <string name="cancel">Cancel</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="go_back_home">Go back home</string>
+    <string name="submit">Submit</string>
 </resources>

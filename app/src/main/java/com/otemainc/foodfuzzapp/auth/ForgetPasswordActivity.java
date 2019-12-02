@@ -136,7 +136,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         };
 
         // Adding request to request queue
-        //MyApp.getInstance().addToRequestQueue(strReq, tag_string_req);
         RequestQueue resetRequestQue = Volley.newRequestQueue(this);
         resetRequestQue.add(strReq);
     }
