@@ -19,7 +19,7 @@
                     <padding android:bottom="5dp"/>
                     <gradient
                         android:startColor="@color/btnRed"
-                        android:endColor="@color/primary_green"
+                        android:endColor="@color/primary_darker"
                         android:angle="270" />
                     <corners
                         android:radius="19dp"/>
@@ -48,7 +48,7 @@
                 <shape>
                     <padding android:bottom="5dp"/>
                     <gradient
-                        android:startColor="@color/primary_green"
+                        android:startColor="@color/primary_darker"
                         android:endColor="@color/btnRed"
                         android:angle="270" />
                     <corners
