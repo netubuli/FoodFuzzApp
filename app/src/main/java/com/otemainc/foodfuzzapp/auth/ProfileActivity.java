@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     private static final String TAG = SignUpActivity.class.getSimpleName();
     private ProgressDialog pDialog;
     Db mydb;
+    private String clientid, clientName, clientEmail, clientPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +46,30 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         submit = findViewById(R.id.btn_save);
         back = findViewById(R.id.link_back);
-        nameText = findViewById(R.id.input_name);
-        emailText = findViewById(R.id.input_email);
-        phoneText = findViewById(R.id.input_telephone);
-        passwordText = findViewById(R.id.input_password);
-        cPasswordText = findViewById(R.id.input_cpassword);
+        nameText = findViewById(R.id.input_RFname);
+        emailText = findViewById(R.id.input_Remail);
+        phoneText = findViewById(R.id.input_RFtelephone);
+        passwordText = findViewById(R.id.input_RFpassword);
+        cPasswordText = findViewById(R.id.input_RFcpassword);
         // Progress dialog
         pDialog = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
         pDialog.setCancelable(false);
         mydb = new Db(this);
+        Cursor clientdata = mydb.getUser();
+        if(clientdata.getCount()>0){
+            clientdata.moveToFirst();
+            do{
+                clientid = clientdata.getString(0);
+                clientName = clientdata.getString(1);
+                clientPhone = clientdata.getString(2);
+                clientEmail = clientdata.getString(3);
+
+            }while (clientdata.moveToNext());
+            clientdata.close();
+            nameText.setText(clientName);
+            emailText.setText(clientEmail);
+            phoneText.setText(clientPhone);
+        }
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
                 final String password = passwordText.getText().toString().trim();
                 final String cpass = cPasswordText.getText().toString().trim();
                 if(validPassword(password, cpass)){
-                    update(fullname,email,phone,password);
+                    update( clientid, fullname, email, phone,password);
                     
                 }
             }
@@ -97,7 +114,7 @@ public class ProfileActivity extends AppCompatActivity {
         return valid;
     }
 
-    private void update(final String fullname, final String email, final String phone, final String password) {
+    private void update( final String clientId, final String fullname, final String email, final String phone, final String password) {
         // Tag used to cancel the request
         pDialog.setMessage("Registering ...");
         showDialog();
@@ -146,6 +163,7 @@ public class ProfileActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<>();
+                params.put("Id", clientId);
                 params.put("name", fullname);
                 params.put("email", email);
                 params.put("phone", phone);
