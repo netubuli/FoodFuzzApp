@@ -27,7 +27,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class DataRetriever {
-    private static final String URL_FOOD = "https://foodfuzz.co.ke/foodfuzzbackend/market/food/food.php";
     private final Context f;
     private FoodGridviewAdapter foodGridviewAdapter;
 
@@ -38,7 +37,7 @@ public class DataRetriever {
         final ArrayList <Food> foods = new ArrayList<>();
         myprogressbar.setIndeterminate(true);
         myprogressbar.setVisibility(View.VISIBLE);
-        StringRequest foodStringRequest = new StringRequest(Request.Method.GET, URL_FOOD,
+        StringRequest foodStringRequest = new StringRequest(Request.Method.GET, AppConfig.URL_FOOD,
                 new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -55,7 +54,7 @@ public class DataRetriever {
                         String cost = jsonObject.getString("cost");
                         String image = jsonObject.getString("image");
                         String seller =jsonObject.getString("seller");
-                        food = new Food(id,"https://foodfuzz.co.ke/foodfuzzbackend/market/uploads/images/"+ image, name, cost,seller);
+                        food = new Food(id,AppConfig.URL_IMAGE + image, name, cost,seller);
                         foods.add(food);
                     }
                     foodGridviewAdapter = new FoodGridviewAdapter(f,foods);

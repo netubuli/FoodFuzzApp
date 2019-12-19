@@ -21,7 +21,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class DrinksRetriever {
-    private static final String URL_DRINK = "https://foodfuzz.co.ke/foodfuzzbackend/market/drink/drink.php";
     private final Context d;
     private DrinkGridviewAdapter drinkGridviewAdapter;
 
@@ -32,7 +31,7 @@ public class DrinksRetriever {
         final ArrayList <Drink> drinks = new ArrayList<>();
         myprogressbar.setIndeterminate(true);
         myprogressbar.setVisibility(View.VISIBLE);
-        StringRequest drinkStringRequest = new StringRequest(Request.Method.GET, URL_DRINK,
+        StringRequest drinkStringRequest = new StringRequest(Request.Method.GET, AppConfig.URL_DRINK,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -49,7 +48,7 @@ public class DrinksRetriever {
                                 String cost = jsonObject.getString("cost");
                                 String image = jsonObject.getString("image");
                                 String seller =jsonObject.getString("seller");
-                                drink = new Drink(id,"https://foodfuzz.co.ke/foodfuzzbackend/market/uploads/images/"+ image, name, cost, seller);
+                                drink = new Drink(id,AppConfig.URL_IMAGE + image, name, cost, seller);
                                 drinks.add(drink);
                             }
                             drinkGridviewAdapter = new DrinkGridviewAdapter(d,drinks);
