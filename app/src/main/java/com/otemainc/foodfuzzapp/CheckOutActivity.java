@@ -269,7 +269,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        JSONObject j = null;
+                        JSONObject j;
                         try {
                             //Parsing the fetched Json String to JSON Object
                             j = new JSONObject(response);
