@@ -47,11 +47,13 @@ public class FoodGridviewAdapter extends BaseAdapter {
             view = LayoutInflater.from(f).inflate(R.layout.food_layout,null,false);
         }
         TextView name = view.findViewById(R.id.name);
+        TextView descr = view.findViewById(R.id.desc);
         TextView cost = view.findViewById(R.id.cost);
         ImageView image = view.findViewById(R.id.image);
         final Food food = (Food) this.getItem(position);
         name.setText(food.getTitle());
-        cost.setText(food.getCost());
+        descr.setText(food.getDescr());
+        cost.setText("KSH "+food.getCost());
         //check if there is an image returned
         if(food.getImage()!= null && food.getImage().length()>0){
             Picasso.get().load(food.getImage()).placeholder(R.drawable.foodfuzzlogo).into(image);

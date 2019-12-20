@@ -1,6 +1,7 @@
 package com.otemainc.foodfuzzapp.utility;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ProgressBar;
@@ -51,10 +52,11 @@ public class DataRetriever {
                         jsonObject = foodArray.getJSONObject(i);
                         int id = jsonObject.getInt("id");
                         String name = jsonObject.getString("name");
+                        String descr = jsonObject.getString("description");
                         String cost = jsonObject.getString("cost");
                         String image = jsonObject.getString("image");
                         String seller =jsonObject.getString("seller");
-                        food = new Food(id,AppConfig.URL_IMAGE + image, name, cost,seller);
+                        food = new Food(id,AppConfig.URL_IMAGE+image, name, descr, cost,seller);
                         foods.add(food);
                     }
                     foodGridviewAdapter = new FoodGridviewAdapter(f,foods);

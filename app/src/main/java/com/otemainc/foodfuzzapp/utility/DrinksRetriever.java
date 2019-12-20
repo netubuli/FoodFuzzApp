@@ -45,10 +45,11 @@ public class DrinksRetriever {
                                 jsonObject = drinkArray.getJSONObject(i);
                                 int id = jsonObject.getInt("id");
                                 String name = jsonObject.getString("name");
+                                String descr = jsonObject.getString("description");
                                 String cost = jsonObject.getString("cost");
                                 String image = jsonObject.getString("image");
                                 String seller =jsonObject.getString("seller");
-                                drink = new Drink(id,AppConfig.URL_IMAGE + image, name, cost, seller);
+                                drink = new Drink(id,AppConfig.URL_IMAGE + image, name, descr, cost, seller);
                                 drinks.add(drink);
                             }
                             drinkGridviewAdapter = new DrinkGridviewAdapter(d,drinks);

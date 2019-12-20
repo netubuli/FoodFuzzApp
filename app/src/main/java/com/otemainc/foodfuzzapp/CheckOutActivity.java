@@ -30,6 +30,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.otemainc.foodfuzzapp.utility.AppConfig;
 import com.otemainc.foodfuzzapp.utility.Db;
 import com.otemainc.foodfuzzapp.utility.RandomGenerator;
 
@@ -58,7 +59,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     double finalCost = 0.00;
     double longitude;
     double latitude;
-    private static final String PATH_TO_SERVER = "https://foodfuzz.co.ke/foodfuzzbackend/market/zones/zones.php";
     //An ArrayList for Spinner Items
     private ArrayList<String> zones;
     //JSON Array
@@ -208,8 +208,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         }
     }
     private void save(final String orderId, final String clientId, final String prodid, final String Seller, final String amount, final String quantity, final double longi, final double lat, final String location, final ProgressDialog progressDialog) {
-        String URL_ORDER = "https://foodfuzz.co.ke/foodfuzzbackend/market/orders/order.php";
-        StringRequest orderStringRequest = new StringRequest(Request.Method.POST, URL_ORDER,
+                StringRequest orderStringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_ORDER,
                 //android M
 
                 new Response.Listener<String>() {
@@ -266,7 +265,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
 
     private void getData(){
         //Creating a string request
-        StringRequest stringRequest = new StringRequest(PATH_TO_SERVER,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, AppConfig.URL_ZONES,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -278,7 +277,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                             //Storing the Array of JSON String to our JSON Array
                             result = j.getJSONArray("zone");
 
-                            //Calling method getStudents to get the students from the JSON Array
+                            //Calling method getzoness to get the zones from the JSON Array
                             getZones(result);
                         } catch (JSONException e) {
                             e.printStackTrace();

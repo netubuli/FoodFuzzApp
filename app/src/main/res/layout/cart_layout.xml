@@ -27,17 +27,6 @@
             android:padding="@dimen/margin_xsmall"
             android:textAppearance="?android:attr/textAppearanceSmall"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            card_view:layout_constraintStart_toStartOf="@id/cname"
-            card_view:layout_constraintBottom_toTopOf="@+id/cseller"
-            card_view:layout_constraintEnd_toStartOf="@+id/tcost"
-            android:text="@string/ksh"
-            android:layout_marginRight="@dimen/margin_xsmall"
-
-            />
-
-        <TextView
             android:id="@+id/tcost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

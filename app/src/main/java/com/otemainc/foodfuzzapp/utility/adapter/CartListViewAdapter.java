@@ -1,6 +1,7 @@
 package com.otemainc.foodfuzzapp.utility.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class CartListViewAdapter extends BaseAdapter {
 
         final Cart cart = (Cart) this.getItem(position);
         name.setText(cart.getTitle());
-        cost.setText(cart.getCost());
+        cost.setText("KSH "+cart.getCost());
         seller.setText(cart.getSeller());
         quantity.setText(Integer.toString(cart.getQuantity()));
         view.setOnClickListener(new View.OnClickListener() {

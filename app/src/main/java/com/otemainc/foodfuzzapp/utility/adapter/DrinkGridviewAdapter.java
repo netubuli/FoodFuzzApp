@@ -48,11 +48,13 @@ public class DrinkGridviewAdapter extends BaseAdapter {
             view = LayoutInflater.from(d).inflate(R.layout.drink_layout,null,false);
         }
         TextView name = view.findViewById(R.id.name);
+        TextView descr = view.findViewById(R.id.desc);
         TextView cost = view.findViewById(R.id.cost);
         ImageView image = view.findViewById(R.id.image);
         final Drink drink = (Drink) this.getItem(position);
         name.setText(drink.getTitle());
-        cost.setText(drink.getCost());
+        descr.setText(drink.getDescr());
+        cost.setText("KSH "+drink.getCost());
         //check if there is an image returned
         if(drink.getImage()!= null && drink.getImage().length()>0){
             Picasso.get().load(drink.getImage()).placeholder(R.drawable.foodfuzzlogo).into(image);
