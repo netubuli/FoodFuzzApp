@@ -228,7 +228,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                                 Toast.makeText(CheckOutActivity.this,"Order failed "+orderObject.getString("message") , Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.d( TAG,"Order error " + e.toString());
                             progressDialog.dismiss();
                             Toast.makeText(CheckOutActivity.this,"Unable to place order " + e.toString(), Toast.LENGTH_SHORT).show();
                             pay.setEnabled(true);
@@ -239,7 +239,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
-                        error.printStackTrace();
+                        Log.d( TAG,"Order exception " + error.toString());
                         Toast.makeText(CheckOutActivity.this,"Error placing order " + error.toString(), Toast.LENGTH_SHORT).show();
                         pay.setEnabled(true);
                     }
