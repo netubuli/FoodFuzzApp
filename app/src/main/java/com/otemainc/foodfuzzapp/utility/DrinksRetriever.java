@@ -49,7 +49,8 @@ public class DrinksRetriever {
                                 String cost = jsonObject.getString("cost");
                                 String image = jsonObject.getString("image");
                                 String seller =jsonObject.getString("seller");
-                                drink = new Drink(id,AppConfig.URL_IMAGE + image, name, descr, cost, seller);
+                                int sellerId = jsonObject.getInt("sellerId");
+                                drink = new Drink(id,AppConfig.URL_IMAGE + image, name, descr, cost, seller, sellerId);
                                 drinks.add(drink);
                             }
                             drinkGridviewAdapter = new DrinkGridviewAdapter(d,drinks);

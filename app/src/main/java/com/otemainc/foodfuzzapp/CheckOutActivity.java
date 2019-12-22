@@ -57,8 +57,8 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     private Spinner spinner;
     double totalCost = 0.00;
     double finalCost = 0.00;
-    double longitude;
-    double latitude;
+    double longitude, latitude;
+    private static final String TAG = CheckOutActivity.class.getSimpleName();
     //An ArrayList for Spinner Items
     private ArrayList<String> zones;
     //JSON Array
@@ -176,7 +176,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                         mydb.clearCart();
                         pay.setVisibility(View.GONE);
                         spinner_label.setVisibility(View.GONE);
-                        spinner_label.setVisibility(View.GONE);
                         currentLoc.setVisibility((View.GONE));
                         deliveryLoc.setVisibility(View.GONE);
                         explain.setVisibility(View.VISIBLE);
@@ -210,10 +209,11 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     private void save(final String orderId, final String clientId, final String prodid, final String Seller, final String amount, final String quantity, final double longi, final double lat, final String location, final ProgressDialog progressDialog) {
                 StringRequest orderStringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_ORDER,
                 //android M
-
                 new Response.Listener<String>() {
+
                     @Override
                     public void onResponse(String response) {
+                        Log.d( TAG,"Order Response " + response);
                         try {
                             JSONObject orderObject = new JSONObject(response);
                             String orderSuccess = orderObject.getString("success");
@@ -269,6 +269,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d( TAG,"Zone Response " + response);
                         JSONObject j;
                         try {
                             //Parsing the fetched Json String to JSON Object
@@ -316,7 +317,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         spinner.setAdapter(new ArrayAdapter<String>(CheckOutActivity.this, android.R.layout.simple_spinner_dropdown_item, zones));
     }
 
-    //Method to get student name of a particular position
+    //Method to get zone name of a particular position
     private String getName(int position){
         String name="";
         try {

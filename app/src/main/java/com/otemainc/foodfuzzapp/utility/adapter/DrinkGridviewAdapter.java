@@ -81,10 +81,10 @@ public class DrinkGridviewAdapter extends BaseAdapter {
                     }
                 }
                 if(drink.getId()== id){
-                   isAdded = db.updateCart(String.valueOf(drink.getId()), drink.getTitle(), Double.valueOf(drink.getCost())+ ccost, drink.getSeller(), quantity+1);
+                   isAdded = db.updateCart(String.valueOf(drink.getId()), drink.getTitle(), Double.valueOf(drink.getCost())+ ccost, String.valueOf(drink.getSellerId()), quantity+1);
 
                 }else{
-                    isAdded = db.addToCart(drink.getId(), drink.getTitle(), drink.getCost(), drink.getSeller(), 1);
+                    isAdded = db.addToCart(drink.getId(), drink.getTitle(), drink.getCost(), String.valueOf(drink.getSellerId()), 1);
 
                 }
                 if (isAdded == true) {
