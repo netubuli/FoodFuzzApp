@@ -151,7 +151,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     if (data.getCount() > 0) {
                         data.moveToFirst();
                         do {
-                           save(orderId,clientid, data.getString(0),data.getString(3),data.getString(2),data.getString(4),longitude,latitude,"_",progressDialog);
+                           save(orderId,clientid, data.getString(0),data.getString(3),data.getString(2),data.getString(4),longitude,latitude,"_",progressDialog,delivery.getText().toString().trim(), String.valueOf(totalCost));
                         } while (data.moveToNext());
                            data.close();
                         mydb.clearCart();
@@ -170,7 +170,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     if (data.getCount() > 0) {
                         data.moveToFirst();
                         do {
-                            save(orderId,clientid, data.getString(0),data.getString(3), data.getString(2),data.getString(4),0.00,0.00,deliveryLoc.getText().toString(),progressDialog);
+                            save(orderId,clientid, data.getString(0),data.getString(3), data.getString(2),data.getString(4),0.00,0.00,deliveryLoc.getText().toString().trim(),progressDialog, delivery.getText().toString().trim(), String.valueOf(totalCost));
                         } while (data.moveToNext());
                         data.close();
                         mydb.clearCart();
@@ -207,7 +207,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 }
         }
     }
-    private void save(final String orderId, final String clientId, final String prodid, final String Seller, final String amount, final String quantity, final double longi, final double lat, final String location, final ProgressDialog progressDialog) {
+    private void save(final String orderId, final String clientId, final String prodid, final String Seller, final String amount, final String quantity, final double longi, final double lat, final String location, final ProgressDialog progressDialog, final String deliveryFee, final String TotalCost) {
                 StringRequest orderStringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_ORDER,
                 //android M
                 new Response.Listener<String>() {
@@ -256,6 +256,8 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 params.put("longitude",String.valueOf(longi));
                 params.put("latitude",String.valueOf(lat));
                 params.put("location",location);
+                params.put("deliveryFee",deliveryFee);
+                params.put("total",TotalCost);
                 return params;
             }
         };
