@@ -38,11 +38,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -153,6 +151,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                         do {
                            save(orderId,clientid, data.getString(0),data.getString(3),data.getString(2),data.getString(4),longitude,latitude,"_");
                         } while (data.moveToNext());
+                        savePayment(orderId,delivery.getText().toString().trim(),String.valueOf(totalCost),progressDialog);
                            data.close();
                         mydb.clearCart();
                         pay.setVisibility(View.GONE);
@@ -183,7 +182,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                         code.setVisibility(View.VISIBLE);
                         confirm.setVisibility(View.VISIBLE);
                         explain.setText("Please make payment of KSH " + finalCost +  "/= to 0706793153 using MPESA/AIRTEL MONEY/TKASH then paste the confirmation code bellow to confirm payment. Note that delivery will not be made until FULL payment has been received.");
-
                     }
                 }
 
@@ -209,7 +207,6 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-
     private void save(final String orderId, final String clientId, final String prodid, final String Seller, final String amount, final String quantity, final double longi, final double lat, final String location) {
                 StringRequest orderStringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_ORDER,
                 //android M
@@ -224,7 +221,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                             if(orderSuccess.equals("1")){
                                 Toast.makeText(CheckOutActivity.this,"Order Placed Successfully " , Toast.LENGTH_SHORT).show();
                             }else{
-                                Logger.getLogger("Error",orderObject.getString("message"));
+                                Log.d( TAG,"Error " + orderObject.getString("message"));
                                 Toast.makeText(CheckOutActivity.this,"Order failed "+orderObject.getString("message") , Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -268,22 +265,22 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
 
                     @Override
                     public void onResponse(String response) {
-                        Log.d( TAG,"Order Response " + response);
+                        Log.d( TAG,"Payment Response " + response);
                         try {
-                            JSONObject orderObject = new JSONObject(response);
-                            String orderSuccess = orderObject.getString("success");
-                            if(orderSuccess.equals("1")){
+                            JSONObject paymentObject = new JSONObject(response);
+                            String paymentSuccess = paymentObject.getString("success");
+                            if(paymentSuccess.equals("1")){
                                 pay.setVisibility(View.GONE);
                                 progressDialog.dismiss();
                                 Toast.makeText(CheckOutActivity.this,"Order Placed Successfully " , Toast.LENGTH_SHORT).show();
                             }else{
-                                Logger.getLogger("Error",orderObject.getString("message"));
+                                Log.d( TAG,"Error " + paymentObject.getString("message"));
                                 pay.setVisibility(View.GONE);
                                 progressDialog.dismiss();
-                                Toast.makeText(CheckOutActivity.this,"Order failed "+orderObject.getString("message") , Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CheckOutActivity.this,"Order failed "+paymentObject.getString("message") , Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
-                            Log.d( TAG,"Order error " + e.toString());
+                            Log.d( TAG,"Payment error " + e.toString());
                             progressDialog.dismiss();
                             Toast.makeText(CheckOutActivity.this,"Unable to place order " + e.toString(), Toast.LENGTH_SHORT).show();
                             pay.setEnabled(true);

@@ -13,15 +13,12 @@ public class RandomGenerator {
         if (length < 1) {
             throw new IllegalArgumentException();
         }
-
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
             int rndCharAt = random.nextInt(DATA_FOR_RANDOM_STRING.length());
             char rndChar = DATA_FOR_RANDOM_STRING.charAt(rndCharAt);
             sb.append(rndChar);
         }
-
         return sb.toString();
-
     }
 }
