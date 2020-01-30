@@ -262,7 +262,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void savePayment(final String orderId, final String deliveryFee, final String total, final ProgressDialog progressDialog) {
-        StringRequest orderStringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_ORDER_PAY,
+        StringRequest paymentStringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_ORDER_PAY,
                 //android M
                 new Response.Listener<String>() {
 
@@ -308,7 +308,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             }
         };
         RequestQueue orderRequestQueue = Volley.newRequestQueue(this);
-        orderRequestQueue.add(orderStringRequest);
+        orderRequestQueue.add(paymentStringRequest);
     }
 
     private void getData(){
