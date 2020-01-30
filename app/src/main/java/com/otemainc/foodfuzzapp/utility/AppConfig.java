@@ -9,5 +9,6 @@ public class AppConfig {
     public static String URL_DRINK ="https://backend.foodfuzz.co.ke/market/drink/drink.php";
     public static String URL_IMAGE = "http://admin.foodfuzz.co.ke/uploads/product/";
     public static String URL_ORDER = "https://backend.foodfuzz.co.ke/market/orders/order.php";
+    public static String URL_ORDER_PAY = "https://backend.foodfuzz.co.ke/market/orders/set.php";
     public static String URL_ZONES = "https://backend.foodfuzz.co.ke/market/zones/zones.php";
 }

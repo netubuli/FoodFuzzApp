@@ -151,7 +151,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     if (data.getCount() > 0) {
                         data.moveToFirst();
                         do {
-                           save(orderId,clientid, data.getString(0),data.getString(3),data.getString(2),data.getString(4),longitude,latitude,"_",progressDialog,delivery.getText().toString().trim(), String.valueOf(totalCost));
+                           save(orderId,clientid, data.getString(0),data.getString(3),data.getString(2),data.getString(4),longitude,latitude,"_");
                         } while (data.moveToNext());
                            data.close();
                         mydb.clearCart();
@@ -170,8 +170,9 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     if (data.getCount() > 0) {
                         data.moveToFirst();
                         do {
-                            save(orderId,clientid, data.getString(0),data.getString(3), data.getString(2),data.getString(4),0.00,0.00,deliveryLoc.getText().toString().trim(),progressDialog, delivery.getText().toString().trim(), String.valueOf(totalCost));
+                            save(orderId,clientid, data.getString(0),data.getString(3), data.getString(2),data.getString(4),0.00,0.00,deliveryLoc.getText().toString().trim());
                         } while (data.moveToNext());
+                        savePayment(orderId,delivery.getText().toString().trim(),String.valueOf(totalCost),progressDialog);
                         data.close();
                         mydb.clearCart();
                         pay.setVisibility(View.GONE);
@@ -207,8 +208,61 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                 }
         }
     }
-    private void save(final String orderId, final String clientId, final String prodid, final String Seller, final String amount, final String quantity, final double longi, final double lat, final String location, final ProgressDialog progressDialog, final String deliveryFee, final String TotalCost) {
+
+
+    private void save(final String orderId, final String clientId, final String prodid, final String Seller, final String amount, final String quantity, final double longi, final double lat, final String location) {
                 StringRequest orderStringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_ORDER,
+                //android M
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d( TAG,"Order Response " + response);
+                        try {
+                            JSONObject orderObject = new JSONObject(response);
+                            String orderSuccess = orderObject.getString("success");
+                            if(orderSuccess.equals("1")){
+                                Toast.makeText(CheckOutActivity.this,"Order Placed Successfully " , Toast.LENGTH_SHORT).show();
+                            }else{
+                                Logger.getLogger("Error",orderObject.getString("message"));
+                                Toast.makeText(CheckOutActivity.this,"Order failed "+orderObject.getString("message") , Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            Log.d( TAG,"Order error " + e.toString());
+                            Toast.makeText(CheckOutActivity.this,"Unable to place order " + e.toString(), Toast.LENGTH_SHORT).show();
+                            pay.setEnabled(true);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d( TAG,"Order exception " + error.toString());
+                        Toast.makeText(CheckOutActivity.this,"Error placing order " + error.toString(), Toast.LENGTH_SHORT).show();
+                        pay.setEnabled(true);
+                    }
+                }){
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("orderId",orderId);
+                params.put("client", clientId);
+                params.put("name", prodid);
+                params.put("seller", Seller);
+                params.put("amount", amount);
+                params.put("quantity",quantity);
+                params.put("longitude",String.valueOf(longi));
+                params.put("latitude",String.valueOf(lat));
+                params.put("location",location);
+                return params;
+            }
+        };
+        RequestQueue orderRequestQueue = Volley.newRequestQueue(this);
+        orderRequestQueue.add(orderStringRequest);
+
+    }
+
+    private void savePayment(final String orderId, final String deliveryFee, final String total, final ProgressDialog progressDialog) {
+        StringRequest orderStringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_ORDER_PAY,
                 //android M
                 new Response.Listener<String>() {
 
@@ -248,22 +302,13 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("orderId",orderId);
-                params.put("client", clientId);
-                params.put("name", prodid);
-                params.put("seller", Seller);
-                params.put("amount", amount);
-                params.put("quantity",quantity);
-                params.put("longitude",String.valueOf(longi));
-                params.put("latitude",String.valueOf(lat));
-                params.put("location",location);
-                params.put("deliveryFee",deliveryFee);
-                params.put("total",TotalCost);
+                params.put("delivery", deliveryFee);
+                params.put("total", total);
                 return params;
             }
         };
         RequestQueue orderRequestQueue = Volley.newRequestQueue(this);
         orderRequestQueue.add(orderStringRequest);
-
     }
 
     private void getData(){
