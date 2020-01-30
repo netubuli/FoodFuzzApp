@@ -84,7 +84,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
         delivery = findViewById(R.id.deliveryFee);
         total = findViewById(R.id.totalCost);
         //Initializing the ArrayList
-        zones = new ArrayList<String>();
+        zones = new ArrayList<>();
         currentLoc.setOnClickListener(this);
         pay.setOnClickListener(this);
         confirm.setOnClickListener(this);
@@ -151,7 +151,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     if (data.getCount() > 0) {
                         data.moveToFirst();
                         do {
-                           save(orderId,clientid, data.getString(0),data.getString(3),String.valueOf(finalCost),data.getString(4),longitude,latitude,"_",progressDialog);
+                           save(orderId,clientid, data.getString(0),data.getString(3),data.getString(2),data.getString(4),longitude,latitude,"_",progressDialog);
                         } while (data.moveToNext());
                            data.close();
                         mydb.clearCart();
@@ -170,7 +170,7 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
                     if (data.getCount() > 0) {
                         data.moveToFirst();
                         do {
-                            save(orderId,clientid, data.getString(0),data.getString(3), String.valueOf(finalCost),data.getString(4),0.00,0.00,deliveryLoc.getText().toString(),progressDialog);
+                            save(orderId,clientid, data.getString(0),data.getString(3), data.getString(2),data.getString(4),0.00,0.00,deliveryLoc.getText().toString(),progressDialog);
                         } while (data.moveToNext());
                         data.close();
                         mydb.clearCart();
@@ -188,19 +188,20 @@ public class CheckOutActivity extends AppCompatActivity implements View.OnClickL
 
                 break;
             case R.id.btnconfirm:
+                //update the order payment
                 break;
             case R.id.btnCurrentLoc:
                 if(currentLoc.isChecked()){
-                   deliveryLoc.setVisibility(v.GONE);
-                   spinner.setVisibility(v.GONE);
-                   spinner_label.setVisibility(v.GONE);
+                   deliveryLoc.setVisibility(View.GONE);
+                   spinner.setVisibility(View.GONE);
+                   spinner_label.setVisibility(View.GONE);
                    delivery.setText("100.00");
                    finalCost = totalCost + Double.valueOf(delivery.getText().toString());
                    total.setText(Double.toString(finalCost));
             }else{
-                    deliveryLoc.setVisibility(v.VISIBLE);
-                    spinner.setVisibility(v.VISIBLE);
-                    spinner_label.setVisibility(v.VISIBLE);
+                    deliveryLoc.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.VISIBLE);
+                    spinner_label.setVisibility(View.VISIBLE);
                     delivery.setText("0.00");
                     total.setText(Double.toString(totalCost));
                 }
