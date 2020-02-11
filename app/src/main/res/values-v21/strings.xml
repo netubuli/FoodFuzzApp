@@ -28,8 +28,9 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="food">Food</string>
-    <string name="drinks">Drinks</string>
-    <string name="restaurant">Coming soon</string>
+    <string name="drinks"> Soft Drinks</string>
+    <string name="alcohol"> Alcoholic Drinks</string>
+    <string name="restaurant">Restaurants</string>
     <string name="cart">Cart</string>
     <string name="add_to_cart">Add to Cart</string>
     <string name="ksh_000_00">0.00</string>
@@ -39,7 +40,7 @@
     <string name="my_cart">My cart</string>
     <string name="orders">Orders</string>
     <string name="browse_by">Browse by:</string>
-    <string name="check_out">Check out</string>
+    <string name="check_out">Order</string>
     <string name="continue_shopping">Continue Shopping</string>
     <string name="cart_successfully_updated">Cart successfully updated</string>
     <string name="seller">Seller</string>
@@ -72,4 +73,5 @@
     <string name="go_back_home">Go back home</string>
     <string name="submit">Submit</string>
     <string name="dash">_ _</string>
+    <string name="mode_of_payment">Mode of payment</string>
 </resources>

@@ -34,7 +34,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/drinks"
-                android:icon="@drawable/ic_local_drink" />
+                android:icon="@drawable/ic_free_breakfast" />
+
+               <com.google.android.material.tabs.TabItem
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/alcohol"
+                   android:icon="@drawable/ic_local_drink"/>
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"

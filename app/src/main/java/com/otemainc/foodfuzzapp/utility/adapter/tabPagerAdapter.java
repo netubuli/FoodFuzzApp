@@ -4,14 +4,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.otemainc.foodfuzzapp.fragment.Alcohol;
 import com.otemainc.foodfuzzapp.fragment.Cart;
 import com.otemainc.foodfuzzapp.fragment.Drink;
 import com.otemainc.foodfuzzapp.fragment.Food;
 import com.otemainc.foodfuzzapp.fragment.Restaurant;
 
 public class tabPagerAdapter extends FragmentStatePagerAdapter {
-    String[] tabArray = new String[]{"Food","Drinks","Restaurant","Cart"};
-    Integer tabno = 4;
+    String[] tabArray = new String[]{"Food","Soft Drinks","Alcoholic Drinks","Restaurant","Cart"};
+    Integer tabno = 5;
 
     public tabPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -32,9 +33,13 @@ public class tabPagerAdapter extends FragmentStatePagerAdapter {
                 Drink drink = new Drink();
                 return drink;
             case 2:
+                Alcohol alcohol = new Alcohol();
+                return alcohol;
+            case 3:
                 Restaurant restaurant = new Restaurant();
                 return restaurant;
-            case 3:
+
+            case 4:
                 Cart cart = new Cart();
                 return cart;
         }
