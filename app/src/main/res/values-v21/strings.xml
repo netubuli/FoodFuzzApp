@@ -74,4 +74,7 @@
     <string name="submit">Submit</string>
     <string name="dash">_ _</string>
     <string name="mode_of_payment">Mode of payment</string>
+    <string name="mpesa_on_delivery">Mpesa On Delivery</string>
+    <string name="mpesa">Mpesa</string>
+    <string name="cash_on_delivery">Cash On Delivery</string>
 </resources>
