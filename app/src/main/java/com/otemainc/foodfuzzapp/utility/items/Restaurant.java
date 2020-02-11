@@ -1,39 +1,24 @@
 package com.otemainc.foodfuzzapp.utility.items;
 
-import android.media.Image;
-
 public class Restaurant {
-    private Image image;
-    private String title;
-    private String cost;
+    private String image, name;
+    int id;
 
-    public Restaurant(Image image, String title, String cost) {
+    public Restaurant(int id, String image, String name) {
+        this.id = id;
         this.image = image;
-        this.title = title;
-        this.cost = cost;
+        this.name = name;
+    }
+    public int getId(){
+        return id;
     }
 
-    public Image getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getCost() {
-        return cost;
-    }
-
-    public void setCost(String cost) {
-        this.cost = cost;
+    public String getName() {
+        return name;
     }
 }
+
