@@ -33,7 +33,7 @@ public class AlcoholRetriever {
         final ArrayList <Alcohol> drinks = new ArrayList<>();
         myprogressbar.setIndeterminate(true);
         myprogressbar.setVisibility(View.VISIBLE);
-        StringRequest drinkStringRequest = new StringRequest(Request.Method.GET, AppConfig.URL_DRINK,
+        StringRequest drinkStringRequest = new StringRequest(Request.Method.GET, AppConfig.URL_ALCOHOL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
