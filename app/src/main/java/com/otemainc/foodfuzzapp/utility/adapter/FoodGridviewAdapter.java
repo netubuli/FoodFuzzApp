@@ -82,7 +82,6 @@ public class FoodGridviewAdapter extends BaseAdapter {
                     }
                 }
                 if(food.getId()== id){
-                    System.out.println("The id at this point is "+id);
                     isAdded = db.updateCart(String.valueOf(food.getId()), food.getTitle(), Double.valueOf(food.getCost())+ ccost, String.valueOf(food.getSellerId()), quantity+1);
 
                 }else{

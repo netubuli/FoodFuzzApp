@@ -62,6 +62,7 @@ public class RestaurantGridviewAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(d, "Placing orders directly from a particular restaurant coming soon", Toast.LENGTH_LONG).show();
 
             }
         });

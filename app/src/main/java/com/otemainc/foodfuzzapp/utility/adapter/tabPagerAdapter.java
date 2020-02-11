@@ -11,7 +11,7 @@ import com.otemainc.foodfuzzapp.fragment.Food;
 import com.otemainc.foodfuzzapp.fragment.Restaurant;
 
 public class tabPagerAdapter extends FragmentStatePagerAdapter {
-    String[] tabArray = new String[]{"Food","Soft Drinks","Alcoholic Drinks","Restaurant","Cart"};
+    String[] tabArray = new String[]{"Meals","Soft Drinks","Alcoholic Drinks","Restaurants","Cart"};
     Integer tabno = 5;
 
     public tabPagerAdapter(FragmentManager fm) {

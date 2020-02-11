@@ -48,7 +48,7 @@ public class RestaurantRetriever {
                                 int id = jsonObject.getInt("id");
                                 String name = jsonObject.getString("name");
                                 String image = jsonObject.getString("image");
-                                restaurant = new Restaurant(id,AppConfig.URL_IMAGE + image, name);
+                                restaurant = new Restaurant(id,AppConfig.URL_RESTAURANT_IMAGE + image, name);
                                 restaurants.add(restaurant);
                             }
                             restaurantGridviewAdapter = new RestaurantGridviewAdapter(d,restaurants);
